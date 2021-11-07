@@ -85,7 +85,7 @@ void Menu::step ()
     {
         if (titlePos.point.x < 0)
         {
-            titlePos.point.x += titleVel.x;
+            titlePos.point.x += (int)titleVel.x;
 
             if (titlePos.point.x >= 0)
             {
@@ -302,7 +302,7 @@ void Character::render ()
         character.render((J_Window::getScreenWidth() / 2) - 12, (J_Window::getScreenHeight() / 2) - 12, &characterSprite[currentCharacter]);
         select.render((J_Window::getScreenWidth() / 2) - (select.getWidth() / 2), (J_Window::getScreenHeight() / 2) - (select.getHeight() / 2), nullptr);
 
-        font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * name[currentCharacter].length()) / 2),
+        font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)name[currentCharacter].length()) / 2),
                      (J_Window::getScreenHeight() / 2) + 16, name[currentCharacter], grey);
     }
 }
@@ -473,7 +473,7 @@ void Config::render ()
         else if (key[Player::KEY_SLIDE] == -1) { piece = "Slide"; }
         else if (key[Player::KEY_PAUSE] == -1) { piece = "Pause"; }
 
-        font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (18 + piece.length())) / 2),
+        font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (18 + (int)piece.length())) / 2),
                      (J_Window::getScreenHeight() / 2) - (font->getCharHeight() / 2),
                      "Enter the new " + piece + " key", grey);
     }
@@ -690,7 +690,7 @@ void Stat::render ()
 
         for (int i = 0, iy = 32; i < 10; ++i, iy += font->getCharHeight())
         {
-            font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * highscores[i].length()) / 2),
+            font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)highscores[i].length()) / 2),
                          iy, highscores[i], grey);
         }
 

@@ -137,9 +137,9 @@ void Game::render ()
         ground.render();
 
         std::ostringstream stream;
-        if (score <= bestScore) { stream /*<< "Score: "*/ << score; }
-        else { stream /*<< "Score: "*/ << score << "!"; }
-        bigFont.render((J_Window::getScreenWidth() / 2) - ((bigFont.getCharWidth() * stream.str().length()) / 2), 0, stream.str(), bar.colour);
+        if (score <= bestScore) { stream << score; }
+        else { stream << score << "!"; }
+        bigFont.render((J_Window::getScreenWidth() / 2) - ((bigFont.getCharWidth() * (int)stream.str().length()) / 2), 0, stream.str(), bar.colour);
 
         if (state == STATE_PAUSED)
         {

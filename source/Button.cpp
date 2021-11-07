@@ -39,7 +39,7 @@ void Button::render ()
             image.render(ix, pos.point.y, &sprite[SPRITE_MIDDLE]);
         }
 
-        image.render(pos.point.x + (SPRITE_WIDTH * (text.length() + 1)), pos.point.y, &sprite[SPRITE_RIGHT]);
+        image.render(pos.point.x + (SPRITE_WIDTH * ((int)text.length() + 1)), pos.point.y, &sprite[SPRITE_RIGHT]);
     }
 
     J_Colour grey = { 83, 83, 83, 255, SDL_BLENDMODE_BLEND };
@@ -148,7 +148,7 @@ void ButtonList::back ()
         button.at(position)->deselect();
 
         --position;
-        if (position < 0) { position = (button.size() - 1); }
+        if (position < 0) { position = ((int)button.size() - 1); }
 
         button.at(position)->select();
 

@@ -65,7 +65,7 @@ void EntityHandler::spawn (const int a_roomid, const int a_pos)
     if (a_roomid > -1) { id = (a_roomid >= static_cast <int> (room.size())) ? 0 : a_roomid; }
     else
     {
-        do { id = J_Math::random(0, room.size()); }
+        do { id = J_Math::random(0, (int)room.size()); }
         while (difficulty.at(id) > currentDifficulty);
     }
 
@@ -114,65 +114,66 @@ void EntityHandler::spawn (const int a_roomid, const int a_pos)
     }
 
     // Spawn each of the entities at the correct positions.
-    try
+    for (int i = 0; i < entityCount; ++i)
     {
-        for (int i = 0; i < entityCount; ++i)
+        switch (entityType[i])
         {
-            switch (entityType[i])
+            case (TYPE_END):
             {
-                case (TYPE_END):
-                {
-                    entity.push_back(nullptr);
+                entity.push_back(nullptr);
 
-                    entity.back() = new End;
-                    entity.back()->create(a_pos + entityPos[i]);
+                entity.back() = new(std::nothrow) End;
+                if(!entity.back()) { J_Error::log("GAME_ERROR_ENTITY_SPAWN"); }
+                else { entity.back()->create(a_pos + entityPos[i]); }
 
-                    break;
-                }
+                break;
+            }
 
-                case (TYPE_COLLECTIBLE):
-                {
-                    entity.push_back(nullptr);
+            case (TYPE_COLLECTIBLE):
+            {
+                entity.push_back(nullptr);
 
-                    entity.back() = new Collectible;
-                    entity.back()->create(a_pos + entityPos[i]);
+                entity.back() = new(std::nothrow) Collectible;
+                if(!entity.back()) { J_Error::log("GAME_ERROR_ENTITY_SPAWN"); }
+                else { entity.back()->create(a_pos + entityPos[i]); }
 
-                    break;
-                }
+                break;
+            }
 
-                case (TYPE_POLE):
-                {
-                    entity.push_back(nullptr);
+            case (TYPE_POLE):
+            {
+                entity.push_back(nullptr);
 
-                    entity.back() = new Pole;
-                    entity.back()->create(a_pos + entityPos[i]);
+                entity.back() = new(std::nothrow) Pole;
+                if(!entity.back()) { J_Error::log("GAME_ERROR_ENTITY_SPAWN"); }
+                else { entity.back()->create(a_pos + entityPos[i]); }
 
-                    break;
-                }
+                break;
+            }
 
-                case (TYPE_SPIKE):
-                {
-                    entity.push_back(nullptr);
+            case (TYPE_SPIKE):
+            {
+                entity.push_back(nullptr);
 
-                    entity.back() = new Spike;
-                    entity.back()->create(a_pos + entityPos[i]);
+                entity.back() = new(std::nothrow) Spike;
+                if(!entity.back()) { J_Error::log("GAME_ERROR_ENTITY_SPAWN"); }
+                else { entity.back()->create(a_pos + entityPos[i]); }
 
-                    break;
-                }
+                break;
+            }
 
-                case (TYPE_WALL):
-                {
-                    entity.push_back(nullptr);
+            case (TYPE_WALL):
+            {
+                entity.push_back(nullptr);
 
-                    entity.back() = new Wall;
-                    entity.back()->create(a_pos + entityPos[i]);
+                entity.back() = new(std::nothrow) Wall;
+                if(!entity.back()) { J_Error::log("GAME_ERROR_ENTITY_SPAWN"); }
+                else { entity.back()->create(a_pos + entityPos[i]); }
 
-                    break;
-                }
+                break;
             }
         }
     }
-    catch (std::bad_alloc& except) { J_Error::log("GAME_ERROR_ENTITY_SPAWN"); }
 
     // Clean up.
     roomData = nullptr;

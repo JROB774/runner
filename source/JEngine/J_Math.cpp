@@ -65,7 +65,7 @@ inline bool operator>= (const J_Vector& a_lhs, const J_Vector& a_rhs) { return !
 
 /// J_MATH ////////////////////////////////////////////////////////////////////
 
-const float J_Math::PI = 3.14159;
+const float J_Math::PI = 3.14159f;
 
 
 

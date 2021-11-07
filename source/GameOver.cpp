@@ -163,7 +163,7 @@ void GameOver::render ()
         {
             std::ostringstream stream;
             stream << "Score: " << score;
-            font->render((J_Window::getScreenWidth() / 2) - ((stream.str().length() * font->getCharWidth()) / 2),
+            font->render((J_Window::getScreenWidth() / 2) - (((int)stream.str().length() * font->getCharWidth()) / 2),
                          (J_Window::getScreenHeight() / 2) + 20, stream.str(), grey);
         }
 

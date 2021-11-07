@@ -124,11 +124,11 @@ void Player::step (const J_Collider& a_ground)
     }
     else if (state == STATE_JUMP)
     {
-        if (jumpPower >= 0) { vel.y = -jumpPower; --jumpPower; }
+        if (jumpPower >= 0) { vel.y = (float)(-jumpPower); --jumpPower; }
         else if (jumpPower < -FLOAT_LENGTH) { vel.y += GRAVITY; }
         else { --jumpPower; }
 
-        pos.point.y += vel.y;
+        pos.point.y += (int)vel.y;
         collider[state].quad.quad.y = (pos.point.y + 5);
     }
 
