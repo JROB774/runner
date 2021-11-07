@@ -1,10 +1,3 @@
 .vs/
-
+binary/
 *.sublime-workspace
-
-**/binary/*.exe
-**/binary/*.exp
-**/binary/*.ilk
-**/binary/*.lib
-**/binary/*.pdb
-**/binary/*.dll
