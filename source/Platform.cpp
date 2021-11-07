@@ -6,8 +6,5 @@
 #ifdef PLATFORM_WEB
 #include "Platform/Web.cpp"
 #endif
-#ifdef PLATFORM_MACOS
-#include "Platform/MacOS.cpp"
-#endif
 
 /// PLATFORM //////////////////////////////////////////////////////////////////
