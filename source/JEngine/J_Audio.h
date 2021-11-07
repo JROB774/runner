@@ -1,9 +1,6 @@
 #ifndef INCLUDE_J_AUDIO
 #define INCLUDE_J_AUDIO
 
-#include <sstream>
-#include "J_Error.h"
-
 class J_Sound
 {
     public:

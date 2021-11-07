@@ -1,8 +1,6 @@
 #ifndef INCLUDE_J_COLLISION
 #define INCLUDE_J_COLLISION
 
-#include "J_Render.h"
-
 struct J_Collider
 {
     public:

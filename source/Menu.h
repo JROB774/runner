@@ -1,7 +1,5 @@
 #ifndef INCLUDE_MENU
-#define INCLUDE_MENUs
-
-#include "GameOver.h"
+#define INCLUDE_MENU
 
 class Menu
 {

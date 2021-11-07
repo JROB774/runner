@@ -1,8 +1,6 @@
 #ifndef INCLUDE_GAME_OVER
 #define INCLUDE_GAME_OVER
 
-#include "Button.h"
-
 class GameOver
 {
     public:

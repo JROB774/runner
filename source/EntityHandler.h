@@ -1,9 +1,6 @@
 #ifndef INCLUDE_ENTITY_HANDLER
 #define INCLUDE_ENTITY_HANDLER
 
-#include <typeinfo>
-#include "Entity.h"
-
 class EntityHandler
 {
     public:

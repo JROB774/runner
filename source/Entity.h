@@ -1,8 +1,6 @@
 #ifndef INCLUDE_ENTITY
 #define INCLUDE_ENTITY
 
-#include "J_System.h"
-
 class Entity
 {
     public:

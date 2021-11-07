@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GAME
 #define INCLUDE_GAME
 
-#include "Player.h"
-#include "EntityHandler.h"
-#include "Highscore.h"
-
 class Game
 {
     public:

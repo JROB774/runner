@@ -1,10 +1,6 @@
 #ifndef INCLUDE_J_RENDER
 #define INCLUDE_J_RENDER
 
-#include <sstream>
-#include <vector>
-#include "J_Error.h"
-
 struct J_Colour
 {
     public:

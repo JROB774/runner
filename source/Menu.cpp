@@ -1,5 +1,3 @@
-#include "Menu.h"
-
 /// MENU //////////////////////////////////////////////////////////////////////
 
 const std::string Menu::HALLOWEEN_FILE = "Resources\\Data\\Halloween.dat";

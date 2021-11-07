@@ -1,5 +1,3 @@
-#include "J_Math.h"
-
 /// J_VECTOR //////////////////////////////////////////////////////////////////
 
 J_Vector::J_Vector (const float a_x, const float a_y)

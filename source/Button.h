@@ -1,9 +1,6 @@
 #ifndef INCLUDE_BUTTON
 #define INCLUDE_BUTTON
 
-#include <cstdarg>
-#include "Game.h"
-
 class Button
 {
     public:

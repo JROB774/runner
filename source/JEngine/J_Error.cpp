@@ -1,5 +1,3 @@
-#include "J_Error.h"
-
 /// J_ERROR ///////////////////////////////////////////////////////////////////
 
 const std::string J_Error::ERROR_FILE = "Resources\\Data\\Error.dat";

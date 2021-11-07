@@ -1,8 +1,6 @@
 #ifndef INCLUDE_J_WINDOW
 #define INCLUDE_J_WINDOW
 
-#include "J_Render.h"
-
 class J_Window
 {
     public:

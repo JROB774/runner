@@ -1,5 +1,3 @@
-#include "J_Window.h"
-
 /// J_WINDOW //////////////////////////////////////////////////////////////////
 
 const std::string J_Window::WINDOW_FILE = "Resources\\Data\\Window.dat";

@@ -1,5 +1,3 @@
-#include "EntityHandler.h"
-
 /// ENTITY HANDLER ////////////////////////////////////////////////////////////
 
 const std::string EntityHandler::DIFFICULTY_FILE = "Resources\\Data\\Difficulty.dat";

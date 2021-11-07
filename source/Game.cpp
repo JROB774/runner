@@ -1,5 +1,3 @@
-#include "Game.h"
-
 /// GAME //////////////////////////////////////////////////////////////////////
 
 const std::string Game::HALLOWEEN_FILE = "Resources\\Data\\Halloween.dat";

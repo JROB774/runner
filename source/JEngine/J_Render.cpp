@@ -1,5 +1,3 @@
-#include "J_Render.h"
-
 /// J_COLOUR //////////////////////////////////////////////////////////////////
 
 inline bool operator== (const J_Colour& a_lhs, const J_Colour& a_rhs)

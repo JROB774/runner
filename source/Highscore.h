@@ -1,9 +1,6 @@
 #ifndef INCLUDE_HIGHSCORE
 #define INCLUDE_HIGHSCORE
 
-#include <string>
-#include "J_Error.h"
-
 class Highscore
 {
     public:

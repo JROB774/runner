@@ -1,8 +1,6 @@
 #ifndef INCLUDE_PLAYER
 #define INCLUDE_PLAYER
 
-#include "J_System.h"
-
 class Player
 {
     public:

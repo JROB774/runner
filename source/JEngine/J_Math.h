@@ -1,9 +1,6 @@
 #ifndef INCLUDE_J_MATH
 #define INCLUDE_J_MATH
 
-#include <cstdlib>
-#include <cmath>
-
 class J_Vector
 {
     public:

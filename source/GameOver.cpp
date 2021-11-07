@@ -1,5 +1,3 @@
-#include "GameOver.h"
-
 /// GAME OVER /////////////////////////////////////////////////////////////////
 
 const std::string GameOver::HALLOWEEN_FILE = "Resources\\Data\\Halloween.dat";

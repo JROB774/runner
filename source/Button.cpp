@@ -1,5 +1,3 @@
-#include "Button.h"
-
 /// BUTTON ////////////////////////////////////////////////////////////////////
 
 const int Button::SPRITE_WIDTH = 4, Button::SPRITE_HEIGHT = 16;

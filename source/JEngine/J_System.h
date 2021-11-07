@@ -1,13 +1,6 @@
 #ifndef INCLUDE_J_SYSTEM
 #define INCLUDE_J_SYSTEM
 
-#include "J_Time.h"
-#include "J_Window.h"
-#include "J_Collision.h"
-#include "J_Audio.h"
-#include "J_Input.h"
-#include "J_Math.h"
-
 class J_System
 {
     public:

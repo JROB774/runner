@@ -1,5 +1,3 @@
-#include "J_System.h"
-
 /// J_SYSTEM //////////////////////////////////////////////////////////////////
 
 const std::string J_System::SYSTEM_FILE = "Resources\\Data\\System.dat";

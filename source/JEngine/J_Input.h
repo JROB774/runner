@@ -1,9 +1,6 @@
 #ifndef INCLUDE_J_INPUT
 #define INCLUDE_J_INPUT
 
-#include <vector>
-#include "J_Error.h"
-
 class J_Input
 {
     public:

@@ -1,6 +1,19 @@
 #ifndef INCLUDE_MAIN
 #define INCLUDE_MAIN
 
+#include <cstring>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstdarg>
+
+#include <string>
+#include <fstream>
+#include <unordered_map>
+#include <sstream>
+#include <vector>
+#include <typeinfo>
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>

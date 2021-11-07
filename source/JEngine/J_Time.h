@@ -1,8 +1,6 @@
 #ifndef INCLUDE_J_TIME
 #define INCLUDE_J_TIME
 
-#include "SDL.h"
-
 class J_Timer
 {
 	public:
