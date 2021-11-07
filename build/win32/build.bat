@@ -10,7 +10,6 @@ if not exist %OutputPath% mkdir %OutputPath%
 
 if not exist %OutputPath%\SDL2.dll copy %SDL2BinDir%\SDL2.dll %OutputPath%
 if not exist %OutputPath%\SDL2_mixer.dll copy %SDL2MixerBinDir%\SDL2_mixer.dll %OutputPath%
-if not exist %OutputPath%\libmodplug-1.dll copy %SDL2MixerBinDir%\libmodplug-1.dll %OutputPath%
 
 if %BuildMode%==Release rc -nologo -i %ResourcePath% %ResourceFile%
 
