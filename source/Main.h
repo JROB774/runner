@@ -1,6 +1,10 @@
 #ifndef INCLUDE_MAIN
 #define INCLUDE_MAIN
 
+#ifdef PLATFORM_WIN32
+#include <windows.h>
+#endif
+
 #include <cstring>
 #include <cmath>
 #include <cstdlib>
@@ -19,13 +23,13 @@
 #include <SDL2/SDL_mixer.h>
 
 #include "JEngine/J_Audio.h"
+#include "JEngine/J_Render.h"
 #include "JEngine/J_Collision.h"
 #include "JEngine/J_Error.h"
 #include "JEngine/J_Input.h"
 #include "JEngine/J_Math.h"
-#include "JEngine/J_Render.h"
-#include "JEngine/J_System.h"
 #include "JEngine/J_Time.h"
+#include "JEngine/J_System.h"
 #include "JEngine/J_Window.h"
 
 #include "Button.h"
@@ -34,8 +38,8 @@
 #include "EntityHandler.h"
 #include "Game.h"
 #include "GameOver.h"
-#include "Highscores.h"
-#include "Menu.h"
+#include "Highscore.h"
 #include "Player.h"
+#include "Menu.h"
 
 #endif // INCLUDE_MAIN

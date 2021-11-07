@@ -113,11 +113,14 @@ void J_Error::terminate ()
 }
 
 
-
+#ifdef PLATFORM_WIN32
 void J_Error::messageBox (const std::string a_message)
 {
     MessageBox(nullptr, a_message.c_str(), "J-Engine Error", MB_OK);
     exit(EXIT_FAILURE);
 }
+#else
+#error J_Error::messageBox not implemented on this platform!
+#endif
 
 /// J_ERROR ///////////////////////////////////////////////////////////////////
