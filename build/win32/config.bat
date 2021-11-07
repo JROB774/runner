@@ -1,11 +1,11 @@
 @echo off
 
-set Libraries=SDL2main.lib SDL2.lib SDL2_image.lib SDL2_mixer.lib user32.lib shell32.lib setargv.obj
-
 :: Can be either "x86" or "amd64"
 set Architecture=amd64
 :: Can be either "Debug" or "Release"
 set BuildMode=Debug
+
+set Libraries=SDL2main.lib SDL2.lib SDL2_image.lib SDL2_mixer.lib user32.lib shell32.lib setargv.obj
 
 set SDL2LibArch=
 if %Architecture%==x86 set SDL2LibArch=x86
