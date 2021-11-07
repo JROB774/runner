@@ -1,10 +1,6 @@
 #ifndef INCLUDE_MAIN
 #define INCLUDE_MAIN
 
-#ifdef PLATFORM_WIN32
-#include <windows.h>
-#endif
-
 #include <cstring>
 #include <cmath>
 #include <cstdlib>
@@ -32,6 +28,7 @@
 #include "JEngine/J_System.h"
 #include "JEngine/J_Window.h"
 
+#include "Platform.h"
 #include "Button.h"
 #include "Container.h"
 #include "Entity.h"
