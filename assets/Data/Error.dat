@@ -1,5 +1,6 @@
 J_ERROR_UNKNOWN=An unknown error occurred!:0
-J_ERROR_IMAGE_SURFACE_LOAD=Could not load a surface from a PNG file!:2
+J_ERROR_IMAGE_LOAD=Could not load a PNG file!:0
+J_ERROR_IMAGE_SURFACE_CREATE=Could not create a surface from pixel data!:1
 J_ERROR_IMAGE_TEXTURE_CREATE=Could not create a texture from a surface!:1
 J_ERROR_IMAGE_RENDER=Could not render an image to the screen!:1
 J_ERROR_IMAGE_RENDER_EXTRA=Could not render an image to the screen with extra render options!:1

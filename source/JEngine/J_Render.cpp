@@ -86,16 +86,28 @@ void J_Image::create (const std::string a_file)
 
     std::string directory = "Resources\\Images\\" + a_file + ".png";
 
-    SDL_Surface* surface = IMG_Load(directory.c_str());
-    if (surface == nullptr) { J_Error::log("J_ERROR_IMAGE_SURFACE_LOAD"); }
-
-    texture = SDL_CreateTextureFromSurface(J_Renderer::renderer, surface);
-    if (texture == nullptr) { J_Error::log("J_ERROR_IMAGE_TEXTURE_CREATE"); }
-
-    width = surface->w, height = surface->h;
-
-    SDL_FreeSurface(surface);
-    surface = nullptr;
+    constexpr int BPP = 4; // We force the image to be in 32-bit RGBA format!
+    int w,h,bpp;
+    unsigned char* data = stbi_load(directory.c_str(), &w,&h,&bpp, BPP);
+    if (!data) { J_Error::log("J_ERROR_IMAGE_LOAD"); }
+    else
+    {
+        int pitch = w*BPP;
+        SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormatFrom((void*)data, w,h,BPP*8,pitch, SDL_PIXELFORMAT_RGBA32);
+        if (!surface) { J_Error::log("J_ERROR_IMAGE_SURFACE_CREATE"); }
+        else
+        {
+            texture = SDL_CreateTextureFromSurface(J_Renderer::renderer, surface);
+            if (!texture) { J_Error::log("J_ERROR_IMAGE_TEXTURE_CREATE"); }
+            else
+            {
+                width = (int)w;
+                height = (int)h;
+            }
+            SDL_FreeSurface(surface);
+        }
+        stbi_image_free(data);
+    }
 }
 
 

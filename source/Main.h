@@ -14,8 +14,12 @@
 #include <vector>
 #include <typeinfo>
 
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_STATIC
+
+#include <stb_image.h>
+
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 
 #include "JEngine/J_Audio.h"

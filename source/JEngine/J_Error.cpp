@@ -89,7 +89,6 @@ void J_Error::log (const std::string a_key)
         switch (type)
         {
             case (TYPE_SDL): { errorLog << " (" << SDL_GetError() << ")"; break; }
-            case (TYPE_IMG): { errorLog << " (" << IMG_GetError() << ")"; break; }
             case (TYPE_MIX): { errorLog << " (" << Mix_GetError() << ")"; break; }
         }
 

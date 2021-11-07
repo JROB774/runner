@@ -9,9 +9,6 @@ call %VSDevPath% -no_logo -arch=%Architecture%
 if not exist %OutputPath% mkdir %OutputPath%
 
 if not exist %OutputPath%\SDL2.dll copy %SDL2BinDir%\SDL2.dll %OutputPath%
-if not exist %OutputPath%\SDL2_image.dll copy %SDL2ImageBinDir%\SDL2_image.dll %OutputPath%
-if not exist %OutputPath%\libpng16-16.dll copy %SDL2ImageBinDir%\libpng16-16.dll %OutputPath%
-if not exist %OutputPath%\zlib1.dll copy %SDL2ImageBinDir%\zlib1.dll %OutputPath%
 if not exist %OutputPath%\SDL2_mixer.dll copy %SDL2MixerBinDir%\SDL2_mixer.dll %OutputPath%
 if not exist %OutputPath%\libmodplug-1.dll copy %SDL2MixerBinDir%\libmodplug-1.dll %OutputPath%
 

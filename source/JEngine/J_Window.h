@@ -9,7 +9,6 @@ class J_Window
 
         static void handle(const SDL_Event&, const bool);
 
-        static void setIcon(const std::string);
         static void setScreenScale(const int);
         static void toggleFullscreen();
         static void updateViewport();

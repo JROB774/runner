@@ -112,21 +112,6 @@ void J_Window::handle (const SDL_Event& a_event, const bool a_debug)
 
 
 
-void J_Window::setIcon (const std::string a_file)
-{
-    std::string directory = "Resources\\" + a_file + ".png";
-
-    SDL_Surface* icon = IMG_Load(directory.c_str());
-    if (icon == nullptr) { J_Error::log("GAME_ERROR_WINDOW_SET_ICON"); }
-
-    SDL_SetWindowIcon(window, icon);
-
-    SDL_FreeSurface(icon);
-    icon = nullptr;
-}
-
-
-
 void J_Window::setScreenScale (const int a_scale)
 {
     // Set the new screen scale.

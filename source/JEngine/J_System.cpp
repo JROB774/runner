@@ -37,7 +37,6 @@ void J_System::initialise ()
     if (state != STATE_RESETTING)
     {
         if (SDL_Init(SDL_INIT_EVERYTHING) != 0) { J_Error::log("J_ERROR_SYSTEM_SDL_INIT"); }
-        if (!IMG_Init(IMG_INIT_PNG)) { J_Error::log("J_ERROR_SYSTEM_IMG_INIT"); }
         if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 2048) < 0) { J_Error::log("J_ERROR_SYSTEM_MIX_INIT"); }
     }
 
@@ -76,8 +75,6 @@ void J_System::initialise ()
     J_Window::setScreenScale(configScale);
     J_Mixer::setSoundVolume(configSoundVolume);
     if (configMuted && !J_Mixer::isMuted()) { J_Mixer::toggleMute(); }
-
-    J_Window::setIcon("Icon_A");
 
     // Set the system state to active.
     state = STATE_ACTIVE;
@@ -222,7 +219,6 @@ void J_System::terminate ()
     if (state != STATE_RESETTING)
     {
         Mix_CloseAudio();
-        IMG_Quit();
         SDL_Quit();
     }
 }
