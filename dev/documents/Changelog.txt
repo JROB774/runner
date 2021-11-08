@@ -1,0 +1,29 @@
+Release v1.3.0 on ???, 2021
+---------------------------------------------------------
+- Fixed a crash with a certain character when in Halloween mode.
+
+
+Release v1.2.0 on October 31st, 2015
+---------------------------------------------------------
+- A whole new set of spooky graphics have been added!
+- A new character, the Pumpking, has been added!
+
+
+Release v1.1.0 on September 3rd, 2015
+---------------------------------------------------------
+- Tweaked one of the obstacle layouts.
+- Balancing changes, with gradually increasing difficulty.
+- New and improved menu navigation.
+- New sound effect on the game over screen for new highscores.
+- An exclamation mark appears next to the score if it's the new highest.
+- Added six new playable characters and a character select menu.
+- Sound options now available from the config screen.
+- More obstacle layouts added.
+- Controls are now fully rebindable.
+- In-game score counter is larger and more clear.
+- General fixes and tweaks.
+
+
+Release v1.0.0 on August 25th, 2015
+---------------------------------------------------------
+- Initial release!
