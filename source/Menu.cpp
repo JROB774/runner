@@ -385,15 +385,13 @@ void Config::initialise (J_Font* a_font)
 
     font = a_font;
 
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2), 44, "Decrease Volume", font, &decreaseVolume);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2), 52, "Increase Volume", font, &increaseVolume);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2), 60, "Toggle Mute", font, &toggleMute);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 14) / 2), 68, "Decrease Scale", font, &decreaseScale);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 14) / 2), 76, "Increase Scale", font, &increaseScale);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 17) / 2), 84, "Toggle Fullscreen", font, &toggleFullscreen);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 16) / 2), 92, "Toggle Halloween", font, &toggleHalloween);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2), 100, "Rebind Keys", font, &rebind);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 4) / 2), 116, "Back", font, &menu);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2), 44, "Decrease Volume",   font, &decreaseVolume);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2), 52, "Increase Volume",   font, &increaseVolume);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2), 60, "Toggle Mute",       font, &toggleMute);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 17) / 2), 68, "Toggle Fullscreen", font, &toggleFullscreen);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 16) / 2), 76, "Toggle Halloween",  font, &toggleHalloween);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2), 84, "Rebind Keys",       font, &rebind);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2), 92, "Back",              font, &menu);
 
     tick.create("Tick", 0);
 
@@ -496,16 +494,6 @@ void Config::toggleMute ()
     J_Mixer::toggleMute();
 }
 
-void Config::decreaseScale ()
-{
-    J_Window::setScreenScale(J_Window::getScreenScale() - 1);
-}
-
-void Config::increaseScale ()
-{
-    J_Window::setScreenScale(J_Window::getScreenScale() + 1);
-}
-
 void Config::toggleFullscreen ()
 {
     J_Window::toggleFullscreen();
@@ -557,14 +545,13 @@ void Config::menu ()
     stream.str(rawData);
 
     bool fullscreen = false;
-    int scale = 0;
+    int scale = 0; // This is now unused! (v1.3.0)
     float volume = 0.0;
     bool mute = false;
 
     stream >> fullscreen >> scale >> volume >> mute;
     stream.str("\0");
 
-    scale = J_Window::getScreenScale();
     fullscreen = J_Window::getFullscreen();
     volume = J_Mixer::getSoundVolume();
     mute = J_Mixer::isMuted();

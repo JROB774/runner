@@ -63,7 +63,7 @@ void J_System::initialise ()
     data.str(rawData);
 
     bool configFullscreen = false;
-    int configScale = 0;
+    int configScale = 0; // This is now unused! (v1.3.0)
     float configSoundVolume = 0.0;
     bool configMuted = false;
 
@@ -72,7 +72,6 @@ void J_System::initialise ()
 
     // Set some starting values stored in the config file.
     if (configFullscreen && !J_Window::getFullscreen()) { J_Window::toggleFullscreen(); }
-    J_Window::setScreenScale(configScale);
     J_Mixer::setSoundVolume(configSoundVolume);
     if (configMuted && !J_Mixer::isMuted()) { J_Mixer::toggleMute(); }
 

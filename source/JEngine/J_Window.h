@@ -9,17 +9,13 @@ class J_Window
 
         static void handle(const SDL_Event&, const bool);
 
-        static void setScreenScale(const int);
         static void toggleFullscreen();
-        static void updateViewport();
-
+        static void updateScale(bool updateRenderScaleAndViewport);
+        static void updateViewport(int screenScale);
         static int getWidth();
         static int getHeight();
         static int getScreenWidth();
         static int getScreenHeight();
-        static int getDesktopWidth();
-        static int getDesktopHeight();
-        static int getScreenScale();
         static bool getFullscreen();
         static SDL_Window* getWindow();
 
@@ -31,8 +27,6 @@ class J_Window
         static std::string title;
         static int width, height;
         static int screenWidth, screenHeight;
-        static int desktopWidth, desktopHeight;
-        static int screenScale;
         static bool fullscreen;
         static SDL_Window* window;
 };

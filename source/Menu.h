@@ -114,8 +114,6 @@ class Config
         static void decreaseVolume();
         static void increaseVolume();
         static void toggleMute();
-        static void decreaseScale();
-        static void increaseScale();
         static void toggleFullscreen();
         static void toggleHalloween();
         static void rebind();
