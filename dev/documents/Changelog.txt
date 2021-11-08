@@ -1,5 +1,7 @@
 Release v1.3.0 on ???, 2021
 ---------------------------------------------------------
+- A whole new set of festive graphics have been added!
+- A new character, the @INCOMPLETE@, has been added!
 - Fixed a crash with a certain character when in Halloween mode.
 
 
