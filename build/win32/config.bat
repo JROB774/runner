@@ -21,7 +21,7 @@ set LibraryDirs=-libpath:%SDL2BinDir% -libpath:%SDL2MixerBinDir%
 set Defines=-D PLATFORM_WIN32 -D _CRT_SECURE_NO_WARNINGS
 
 set CompilerFlags=-Zc:__cplusplus -std:c++17 -nologo -W4 -MT -Oi -EHsc -Z7
-set LinkerFlags=-opt:ref -incremental:no -subsystem:windows
+set LinkerFlags=-opt:ref -incremental:no
 
 set CompilerWarnings=-wd4100 -wd4505 -wd4189
 set LinkerWarnings=-ignore:4099
@@ -37,9 +37,11 @@ set OutputName=RUNNER
 
 if %BuildMode%==Release (
     set CompilerFlags=%CompilerFlags%
+    set LinkerFlags=%LinkerFlags% -subsystem:windows
 )
 if %BuildMode%==Debug (
     set InputResource=
+    set LinkerFlags=%LinkerFlags% -subsystem:console
 )
 
 if %Architecture%==x86 (
