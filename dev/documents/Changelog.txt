@@ -5,6 +5,7 @@ Release v1.3.0 on ???, 2021
 - Screen content now automatically resizes based on window size.
 - Fixed issues with window resizing in a strange way.
 - Fixed a crash with a certain character when in Halloween mode.
+- Fixed menu buttons being slightly off-center.
 
 
 Release v1.2.0 on October 31st, 2015

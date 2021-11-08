@@ -35,11 +35,11 @@ void Menu::initialise (J_Font* a_font)
 
     font = a_font;
 
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 4) / 2), 88, "Play", font, &play);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 9) / 2), 96, "Character", font, &character);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 10) / 2), 104, "Highscores", font, &stats);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 6) / 2), 112, "Config", font, &config);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 4) / 2), 120, "Exit", font, &exit);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3,  88, "Play",       font, &play);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  9) / 2) - 3,  96, "Character",  font, &character);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 10) / 2) - 3, 104, "Highscores", font, &stats);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  6) / 2) - 3, 112, "Config",     font, &config);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3, 120, "Exit",       font, &exit);
 
     tick.create("Tick", 0);
 
@@ -385,13 +385,13 @@ void Config::initialise (J_Font* a_font)
 
     font = a_font;
 
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2), 44, "Decrease Volume",   font, &decreaseVolume);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2), 52, "Increase Volume",   font, &increaseVolume);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2), 60, "Toggle Mute",       font, &toggleMute);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 17) / 2), 68, "Toggle Fullscreen", font, &toggleFullscreen);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 16) / 2), 76, "Toggle Halloween",  font, &toggleHalloween);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2), 84, "Rebind Keys",       font, &rebind);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2), 92, "Back",              font, &menu);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2) - 3, 44, "Decrease Volume",   font, &decreaseVolume);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2) - 3, 52, "Increase Volume",   font, &increaseVolume);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2) - 3, 60, "Toggle Mute",       font, &toggleMute);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 17) / 2) - 3, 68, "Toggle Fullscreen", font, &toggleFullscreen);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 16) / 2) - 3, 76, "Toggle Halloween",  font, &toggleHalloween);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2) - 3, 84, "Rebind Keys",       font, &rebind);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3, 92, "Back",              font, &menu);
 
     tick.create("Tick", 0);
 
