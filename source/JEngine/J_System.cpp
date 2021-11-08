@@ -100,7 +100,6 @@ void J_System::handle ()
             {
                 switch (event.key.keysym.sym)
                 {
-                    case (SDLK_ESCAPE) : { state = STATE_INACTIVE; break; }
                     case (SDLK_r) : { state = STATE_RESETTING; break; }
                 }
             }
