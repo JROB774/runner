@@ -117,7 +117,7 @@ void Collectible::create (const int a_x)
 {
     pos.point = { a_x, 104 };
 
-    image.create((halloween) ? "Halloween\\Collectible" : "Collectible");
+    image.create((halloween) ? "Halloween/Collectible" : "Collectible");
     animation.create("Collectible");
     sound.create("Collectible", 1);
 
@@ -180,7 +180,7 @@ void Pole::create (const int a_x)
 {
     pos.point = { a_x, 84 };
 
-    image.create((halloween) ? "Halloween\\Pole" : "Pole");
+    image.create((halloween) ? "Halloween/Pole" : "Pole");
     animation.create("Pole");
 
     collider.quad.quad = { (pos.point.x + COLLIDER_X_OFFSET), (pos.point.y + COLLIDER_Y_OFFSET), 8, 28 };
@@ -203,7 +203,7 @@ void Spike::create (const int a_x)
 {
     pos.point = { a_x, 100 };
 
-    image.create((halloween) ? "Halloween\\Spike" : "Spike");
+    image.create((halloween) ? "Halloween/Spike" : "Spike");
     animation.create("Spike");
 
     collider.quad.quad = { (pos.point.x + COLLIDER_X_OFFSET), (pos.point.y + COLLIDER_Y_OFFSET), 12, 12 };
@@ -226,7 +226,7 @@ void Wall::create (const int a_x)
 {
     pos.point = { a_x, 60 };
 
-    image.create((halloween) ? "Halloween\\Wall" : "Wall");
+    image.create((halloween) ? "Halloween/Wall" : "Wall");
     animation.create("Wall");
 
     collider.quad.quad = { (pos.point.x + COLLIDER_X_OFFSET), (pos.point.y + COLLIDER_Y_OFFSET), 14, 41 };

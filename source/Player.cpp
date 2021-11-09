@@ -33,7 +33,7 @@ void Player::initialise(const bool a_halloween)
     }
     else { J_Error::log("GAME_ERROR_SAVE_LOAD"); }
 
-    image.create((a_halloween) ? "Halloween\\Player" + player : "Player" + player);
+    image.create((a_halloween) ? "Halloween/Player" + player : "Player" + player);
 
     runA.create("Run");
     jumpA.create("Jump");

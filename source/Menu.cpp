@@ -28,7 +28,7 @@ void Menu::initialise (J_Font* a_font)
     background.quad = { 0, 0, J_Window::getScreenWidth(), J_Window::getScreenHeight() };
     background.colour = { 255, 255, 255, 255, SDL_BLENDMODE_BLEND };
 
-    title.create((halloween) ? "Halloween\\Title" : "Title");
+    title.create((halloween) ? "Halloween/Title" : "Title");
     titlePos.point = { -J_Window::getScreenWidth(), 0 };
     titleVel = { 6, 0 };
     titlePlaced = false;

@@ -25,8 +25,8 @@ void Game::initialise (J_Font* a_font)
     }
     else { J_Error::log("GAME_ERROR_LOAD_HALLOWEEN"); }
 
-    front.create((halloween) ? "Halloween\\Front" : "Front");
-    back.create((halloween) ? "Halloween\\Back" : "Back");
+    front.create((halloween) ? "Halloween/Front" : "Front");
+    back.create((halloween) ? "Halloween/Back" : "Back");
 
     ground.quad.quad = { 0, (J_Window::getScreenHeight() - (J_Window::getScreenHeight() / 6)),
                          J_Window::getScreenWidth(), (J_Window::getScreenHeight() / 6) };
