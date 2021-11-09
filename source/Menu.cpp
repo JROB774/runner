@@ -1,6 +1,6 @@
 /// MENU //////////////////////////////////////////////////////////////////////
 
-const std::string Menu::HALLOWEEN_FILE = "Resources\\Data\\Halloween.dat";
+const std::string Menu::HALLOWEEN_FILE = RES_DIR_DATA "Halloween.dat";
 J_Quad Menu::background;
 J_Image Menu::title;
 J_Point Menu::titlePos;
@@ -165,8 +165,8 @@ void Menu::terminate ()
 
 /// CHARACTER /////////////////////////////////////////////////////////////////
 
-const std::string Character::CHARACTER_FILE = "Resources\\Data\\Characters.dat";
-const std::string Character::SAVE_FILE = "Resources\\Data\\Save.dat";
+const std::string Character::CHARACTER_FILE = RES_DIR_DATA "Characters.dat";
+const std::string Character::SAVE_FILE = RES_DIR_DATA "Save.dat";
 J_Quad Character::background;
 J_Image Character::select;
 J_Image Character::character;
@@ -366,9 +366,9 @@ void Character::terminate ()
 
 /// CONFIG ////////////////////////////////////////////////////////////////////
 
-const std::string Config::KEY_FILE = "Resources\\Data\\Keys.dat";
-const std::string Config::HALLOWEEN_FILE = "Resources\\Data\\Halloween.dat";
-const std::string Config::CONFIG_FILE = "Resources\\Data\\Config.dat";
+const std::string Config::KEY_FILE = RES_DIR_DATA "Keys.dat";
+const std::string Config::HALLOWEEN_FILE = RES_DIR_DATA "Halloween.dat";
+const std::string Config::CONFIG_FILE = RES_DIR_DATA "Config.dat";
 J_Quad Config::background;
 J_Font* Config::font = nullptr;
 ButtonList Config::button;

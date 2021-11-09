@@ -84,7 +84,7 @@ void J_Image::create (const std::string a_file)
 {
     if (texture != nullptr) { destroy(); }
 
-    std::string directory = "Resources\\Images\\" + a_file + ".png";
+    std::string directory = RES_DIR_IMAGES + a_file + ".png";
 
     constexpr int BPP = 4; // We force the image to be in 32-bit RGBA format!
     int w,h,bpp;
@@ -211,7 +211,7 @@ void J_Animation::create (const std::string a_file)
 {
     if (!sprite.empty() && (!delay.empty())) { destroy(); }
 
-    std::string directory = "Resources\\Animations\\" + a_file + ".anim";
+    std::string directory = RES_DIR_ANIMATIONS + a_file + ".anim";
     std::ifstream animationFile(directory, std::ifstream::in);
     std::string rawData = "\0";
 
@@ -401,7 +401,7 @@ J_Background::J_Background ()
 
 void J_Background::create (const std::string a_file)
 {
-    std::string directory = "Resources\\Backgrounds\\" + a_file + ".bg";
+    std::string directory = RES_DIR_BACKGROUNDS + a_file + ".bg";
     std::ifstream backgroundFile(directory, std::ifstream::in);
     std::string rawData = "\0";
 
@@ -595,7 +595,7 @@ void J_Font::create (const std::string a_file)
 {
     if (character != nullptr) { destroy(); }
 
-    std::string directory = "Resources\\Fonts\\" + a_file + ".font";
+    std::string directory = RES_DIR_FONTS + a_file + ".font";
     std::ifstream fontFile(directory, std::ifstream::in);
     std::string rawData = "\0";
 

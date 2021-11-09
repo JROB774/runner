@@ -1,6 +1,6 @@
 /// GAME //////////////////////////////////////////////////////////////////////
 
-const std::string Game::HALLOWEEN_FILE = "Resources\\Data\\Halloween.dat";
+const std::string Game::HALLOWEEN_FILE = RES_DIR_DATA "Halloween.dat";
 J_Background Game::front;
 J_Background Game::back;
 J_Collider Game::ground;

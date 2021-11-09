@@ -12,7 +12,7 @@ void J_Sound::create (const std::string a_file, const int a_channel)
 {
     if (chunk != nullptr) { destroy(); }
 
-    std::string directory = "Resources\\Sounds\\" + a_file + ".wav";
+    std::string directory = RES_DIR_SOUNDS + a_file + ".wav";
     chunk = Mix_LoadWAV(directory.c_str());
     if (chunk == nullptr) { J_Error::log("J_ERROR_SOUND_CREATE"); }
 
@@ -50,7 +50,7 @@ J_Sound::~J_Sound ()
 
 /// J_MIXER ///////////////////////////////////////////////////////////////////
 
-const std::string J_Mixer::AUDIO_FILE = "Resources\\Data\\Audio.dat";
+const std::string J_Mixer::AUDIO_FILE = RES_DIR_DATA "Audio.dat";
 int J_Mixer::maxChannels = 0;
 float J_Mixer::soundVolume = 0.0;
 float J_Mixer::volumePiece = 0.0;

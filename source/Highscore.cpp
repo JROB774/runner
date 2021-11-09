@@ -1,7 +1,7 @@
 /// HIGHSCORE /////////////////////////////////////////////////////////////////
 
 const int Highscore::TOTAL = 10;
-const std::string Highscore::FILE = "Resources\\Data\\Highscores.dat";
+const std::string Highscore::FILE = RES_DIR_DATA "Highscores.dat";
 
 
 

@@ -1,7 +1,7 @@
 /// J_PLAYER //////////////////////////////////////////////////////////////////
 
-const std::string Player::KEY_FILE = "Resources\\Data\\Keys.dat";
-const std::string Player::SAVE_FILE = "Resources\\Data\\Save.dat";
+const std::string Player::KEY_FILE = RES_DIR_DATA "Keys.dat";
+const std::string Player::SAVE_FILE = RES_DIR_DATA "Save.dat";
 const J_Point Player::STARTING_POS = { { 10, 100 } };
 J_Point Player::pos = { { 0, 0 } };
 J_Vector Player::vel = { 0, 0 };

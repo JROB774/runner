@@ -42,6 +42,7 @@ if %BuildMode%==Release (
 if %BuildMode%==Debug (
     set InputResource=
     set LinkerFlags=%LinkerFlags% -subsystem:console
+    set Defines=%Defines% -D BUILD_DEBUG
 )
 
 if %Architecture%==x86 (

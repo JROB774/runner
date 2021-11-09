@@ -1,6 +1,6 @@
 /// GAME OVER /////////////////////////////////////////////////////////////////
 
-const std::string GameOver::HALLOWEEN_FILE = "Resources\\Data\\Halloween.dat";
+const std::string GameOver::HALLOWEEN_FILE = RES_DIR_DATA "Halloween.dat";
 J_Quad GameOver::background;
 J_Image GameOver::medal;
 J_Quad GameOver::sprite[GameOver::MEDAL_TOTAL];

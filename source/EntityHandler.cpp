@@ -1,7 +1,7 @@
 /// ENTITY HANDLER ////////////////////////////////////////////////////////////
 
-const std::string EntityHandler::DIFFICULTY_FILE = "Resources\\Data\\Difficulty.dat";
-const std::string EntityHandler::ROOM_FILE = "Resources\\Data\\Rooms.dat";
+const std::string EntityHandler::DIFFICULTY_FILE = RES_DIR_DATA "Difficulty.dat";
+const std::string EntityHandler::ROOM_FILE = RES_DIR_DATA "Rooms.dat";
 const int EntityHandler::KILL_POINT = -64;
 const int EntityHandler::MEDIUM_CAP = 30, EntityHandler::HARD_CAP = 45;
 std::vector <int> EntityHandler::difficulty;
