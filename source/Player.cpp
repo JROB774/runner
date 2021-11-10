@@ -22,6 +22,7 @@ void Player::initialise(const bool a_halloween)
     pos = STARTING_POS;
 
     std::string player = "Player" + std::to_string(currentCharacter);
+    image.create(player);
 
     runA.create("Run");
     jumpA.create("Jump");
