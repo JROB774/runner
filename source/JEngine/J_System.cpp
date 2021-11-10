@@ -24,13 +24,21 @@ void J_System::initialise ()
 
         std::getline(systemFile, rawData);
         data.str(rawData);
-        data >> fps >> debug;
+        data >> fps;
 
         tpf = 1000 / fps;
 
         systemFile.close();
     }
     else { J_Error::log("J_ERROR_SYSTEM_FILE_READ"); }
+
+
+    // Allow for special debug deatures when building the game in debug mode.
+    #ifdef BUILD_DEBUG
+    debug = true;
+    #else
+    debug = false;
+    #endif
 
 
     // If the system is not resetting initialise all the SDL sub-systems.
