@@ -481,12 +481,12 @@ void Config::render ()
 
 void Config::decreaseVolume ()
 {
-    J_Mixer::setSoundVolume(J_Mixer::getSoundVolume() - J_Mixer::getVolumePiece());
+    // @INCOMPLETE: ...
 }
 
 void Config::increaseVolume ()
 {
-    J_Mixer::setSoundVolume(J_Mixer::getSoundVolume() + J_Mixer::getVolumePiece());
+    // @INCOMPLETE: ...
 }
 
 void Config::toggleMute ()

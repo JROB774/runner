@@ -53,7 +53,6 @@ J_Sound::~J_Sound ()
 const std::string J_Mixer::AUDIO_FILE = RES_DIR_DATA "Audio.dat";
 int J_Mixer::maxChannels = 0;
 float J_Mixer::soundVolume = 0.0;
-float J_Mixer::volumePiece = 0.0;
 bool J_Mixer::muted = false;
 
 
@@ -69,29 +68,13 @@ void J_Mixer::initialise ()
 
         std::getline(audioFile, rawData);
         data.str(rawData);
-        data >> maxChannels >> volumePiece;
+        data >> maxChannels;
 
         audioFile.close();
     }
     else { J_Error::log("J_ERROR_MIXER_FILE_READ"); }
 
     Mix_AllocateChannels(maxChannels);
-}
-
-
-
-void J_Mixer::handle (const SDL_Event& a_event)
-{
-    if (a_event.type == SDL_KEYDOWN)
-    {
-        switch (a_event.key.keysym.sym)
-        {
-            case (SDLK_m): { toggleMute(); break; }
-
-            case (SDLK_EQUALS): { if (!muted) { setSoundVolume(soundVolume + volumePiece); } break; }
-            case (SDLK_MINUS): { if (!muted) { setSoundVolume(soundVolume - volumePiece); } break; }
-        }
-    }
 }
 
 
@@ -131,11 +114,6 @@ float J_Mixer::getSoundVolume ()
     return soundVolume;
 }
 
-float J_Mixer::getVolumePiece ()
-{
-    return volumePiece;
-}
-
 bool J_Mixer::isMuted ()
 {
     return muted;
@@ -147,7 +125,6 @@ void J_Mixer::terminate ()
 {
     maxChannels = 0;
     soundVolume = 0.0;
-    volumePiece = 0.0;
     muted = false;
 }
 

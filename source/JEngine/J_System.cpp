@@ -112,7 +112,6 @@ void J_System::handle ()
     if (debug)
     {
         J_Collision::handle(event);
-        J_Mixer::handle(event);
     }
 
     J_Window::handle(event, debug);

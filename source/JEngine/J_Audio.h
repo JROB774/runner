@@ -33,15 +33,12 @@ class J_Mixer
 
         static void initialise();
 
-        static void handle(const SDL_Event&);
-
         static void setChannels(const int);
         static void setSoundVolume(const float);
         static void toggleMute();
 
         static int getChannels();
         static float getSoundVolume();
-        static float getVolumePiece();
         static bool isMuted();
 
         static void terminate();
@@ -51,7 +48,6 @@ class J_Mixer
         static const std::string AUDIO_FILE;
         static int maxChannels;
         static float soundVolume;
-        static float volumePiece;
         static bool muted;
 };
 
