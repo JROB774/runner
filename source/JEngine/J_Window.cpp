@@ -17,6 +17,9 @@ void J_Window::initialise ()
     // Open the window data file to extract data.
     std::ifstream windowFile(WINDOW_FILE, std::ifstream::in);
 
+    int startWidth = 0;
+    int startHeight = 0;
+
     if (windowFile.is_open())
     {
         std::string rawData = "\0";
@@ -24,18 +27,18 @@ void J_Window::initialise ()
 
         std::getline(windowFile, rawData);
         data.str(rawData);
-        data >> title >> screenWidth >> screenHeight;
+        data >> title >> screenWidth >> screenHeight >> startWidth >> startHeight;
 
         windowFile.close();
     }
     else { J_Error::log("J_ERROR_WINDOW_FILE_READ"); }
 
-    // Set the window's starting dimensions and scale.
-    updateScale(false);
-
     // The window itself is created using the informaation gathered from the data file.
-    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, startWidth, startHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (window == nullptr) { J_Error::log("J_ERROR_WINDOW_CREATE"); }
+
+    // Set the window's scale.
+    updateScale(false);
 
     // Set the window's minimum size to the screen dimensions.
     SDL_SetWindowMinimumSize(window, screenWidth, screenHeight);
