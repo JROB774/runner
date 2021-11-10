@@ -28,7 +28,6 @@ class Game
 
     private:
 
-        static const std::string HALLOWEEN_FILE;
         static J_Background front;
         static J_Background back;
         static J_Collider ground;

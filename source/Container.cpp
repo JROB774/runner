@@ -14,22 +14,14 @@ void Container::initialise ()
     ButtonList::initialise();
 
     srand(static_cast <unsigned int> (time(nullptr)));
+
+    Save::load();
 }
 
 
 
 void Container::handle ()
 {
-    /*
-    if (J_Input::getInput().type == SDL_KEYDOWN)
-    {
-        if ((J_Input::getInput().key.keysym.sym == SDLK_ESCAPE) && (J_Input::getInput().key.repeat == 0))
-        {
-            J_System::stop();
-        }
-    }
-    */
-
     if (Game::getState() != Game::STATE_TERMINATE)
     {
         Game::handle();
@@ -136,6 +128,8 @@ void Container::step ()
 
     Game::step();
     GameOver::step();
+
+    Save::step();
 }
 
 
@@ -155,6 +149,8 @@ void Container::render ()
 
 void Container::terminate ()
 {
+    Save::save();
+
     font.destroy();
 
     ButtonList::terminate();

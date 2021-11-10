@@ -9,9 +9,10 @@ class J_Window
 
         static void handle(const SDL_Event&, const bool);
 
+        static void setFullscreen(const bool);
         static void toggleFullscreen();
-        static void updateScale(bool updateRenderScaleAndViewport);
-        static void updateViewport(int screenScale);
+        static void updateScale(const bool);
+        static void updateViewport(const int);
         static int getWidth();
         static int getHeight();
         static int getScreenWidth();

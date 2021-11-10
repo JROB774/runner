@@ -1,6 +1,5 @@
 /// MENU //////////////////////////////////////////////////////////////////////
 
-const std::string Menu::HALLOWEEN_FILE = RES_DIR_DATA "Halloween.dat";
 J_Quad Menu::background;
 J_Image Menu::title;
 J_Point Menu::titlePos;
@@ -16,15 +15,6 @@ int Menu::state = -1;
 
 void Menu::initialise (J_Font* a_font)
 {
-    std::ifstream file(HALLOWEEN_FILE);
-
-    if (file.is_open())
-    {
-        file >> halloween;
-        file.close();
-    }
-    else { J_Error::log("GAME_ERROR_LOAD_HALLOWEEN"); }
-
     background.quad = { 0, 0, J_Window::getScreenWidth(), J_Window::getScreenHeight() };
     background.colour = { 255, 255, 255, 255, SDL_BLENDMODE_BLEND };
 
@@ -166,7 +156,6 @@ void Menu::terminate ()
 /// CHARACTER /////////////////////////////////////////////////////////////////
 
 const std::string Character::CHARACTER_FILE = RES_DIR_DATA "Characters.dat";
-const std::string Character::SAVE_FILE = RES_DIR_DATA "Save.dat";
 J_Quad Character::background;
 J_Image Character::select;
 J_Image Character::character;
@@ -199,17 +188,7 @@ void Character::initialise (J_Font* a_font)
 
     font = a_font;
 
-    std::ifstream file(SAVE_FILE);
-    std::string rawData = "\0";
-
-    if (file.is_open())
-    {
-        std::getline(file, rawData);
-        file.close();
-    }
-    else { J_Error::log("GAME_ERROR_SAVE_LOAD"); }
-
-    currentCharacter = atoi(rawData.c_str());
+    currentCharacter = Player::getCharacter();
 
     button.create(0, 0, "\0", nullptr, &menu);
 
@@ -221,8 +200,7 @@ void Character::initialise (J_Font* a_font)
     name = new(std::nothrow) std::string[characterTotal];
     if (name == nullptr) { J_Error::log("GAME_ERROR_CHARACTER_INIT"); }
 
-    file.open(CHARACTER_FILE);
-
+    std::ifstream file(CHARACTER_FILE, std::ios::in);
     if (file.is_open())
     {
         for (int i = 0; i < characterTotal; ++i) { std::getline(file, name[i]); }
@@ -311,17 +289,7 @@ void Character::render ()
 
 void Character::menu ()
 {
-    std::ofstream file(SAVE_FILE);
-
-    if (file.is_open())
-    {
-        std::string data = std::to_string(currentCharacter);
-
-        file << data;
-        file.close();
-    }
-    else { J_Error::log("GAME_ERROR_SAVE_SAVE"); }
-
+    Player::setCharacter(currentCharacter);
     state = STATE_INACTIVE;
 }
 
@@ -366,9 +334,6 @@ void Character::terminate ()
 
 /// CONFIG ////////////////////////////////////////////////////////////////////
 
-const std::string Config::KEY_FILE = RES_DIR_DATA "Keys.dat";
-const std::string Config::HALLOWEEN_FILE = RES_DIR_DATA "Halloween.dat";
-const std::string Config::CONFIG_FILE = RES_DIR_DATA "Config.dat";
 J_Quad Config::background;
 J_Font* Config::font = nullptr;
 ButtonList Config::button;
@@ -428,14 +393,9 @@ void Config::handle ()
             {
                 key[Player::KEY_PAUSE] = J_Input::getInput().key.keysym.sym;
 
-                std::ofstream file(KEY_FILE);
-
-                if (file.is_open())
-                {
-                    file << key[Player::KEY_JUMP] << " " << key[Player::KEY_SLIDE] << " " << key[Player::KEY_PAUSE];
-                    file.close();
-                }
-                else { J_Error::log("GAME_ERROR_KEY_SAVE"); }
+                Player::setKey(Player::KEY_JUMP,  key[Player::KEY_JUMP]);
+                Player::setKey(Player::KEY_SLIDE, key[Player::KEY_SLIDE]);
+                Player::setKey(Player::KEY_PAUSE, key[Player::KEY_PAUSE]);
 
                 state = STATE_ACTIVE;
             }
@@ -501,26 +461,7 @@ void Config::toggleFullscreen ()
 
 void Config::toggleHalloween ()
 {
-    bool halloween = false;
-    std::fstream file(HALLOWEEN_FILE, std::ios::in);
-
-    if (file.is_open())
-    {
-        file >> halloween;
-        file.close();
-    }
-    else { J_Error::log("GAME_ERROR_LOAD_HALLOWEEN"); }
-
-    halloween = !halloween;
-
-    file.open(HALLOWEEN_FILE, std::ios::out);
-
-    if (file.is_open())
-    {
-        file << halloween;
-        file.close();
-    }
-    else { J_Error::log("GAME_ERROR_SAVE_HALLOWEEN"); }
+    // @INCOMPLETE:...
 }
 
 void Config::rebind ()
@@ -531,40 +472,6 @@ void Config::rebind ()
 
 void Config::menu ()
 {
-    std::fstream file(CONFIG_FILE, std::ios::in);
-    std::string rawData = "\0";
-
-    if (file.is_open())
-    {
-        std::getline(file, rawData);
-        file.close();
-    }
-    else { J_Error::log("GAME_ERROR_LOAD_CONFIG"); }
-
-    std::istringstream stream;
-    stream.str(rawData);
-
-    bool fullscreen = false;
-    int scale = 0; // This is now unused! (v1.3.0)
-    float volume = 0.0;
-    bool mute = false;
-
-    stream >> fullscreen >> scale >> volume >> mute;
-    stream.str("\0");
-
-    fullscreen = J_Window::getFullscreen();
-    volume = J_Mixer::getSoundVolume();
-    mute = J_Mixer::isMuted();
-
-    file.open(CONFIG_FILE, std::ios::out);
-
-    if (file.is_open())
-    {
-        file << fullscreen << " " << scale << " " << volume << " " << mute;
-        file.close();
-    }
-    else { J_Error::log("GAME_ERROR_SAVE_CONFIG"); }
-
     state = STATE_INACTIVE;
 }
 

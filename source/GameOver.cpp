@@ -1,6 +1,5 @@
 /// GAME OVER /////////////////////////////////////////////////////////////////
 
-const std::string GameOver::HALLOWEEN_FILE = RES_DIR_DATA "Halloween.dat";
 J_Quad GameOver::background;
 J_Image GameOver::medal;
 J_Quad GameOver::sprite[GameOver::MEDAL_TOTAL];
@@ -19,15 +18,6 @@ int GameOver::state = -1;
 
 void GameOver::initialise (J_Font* a_font, const int a_score)
 {
-    std::ifstream file(HALLOWEEN_FILE);
-
-    if (file.is_open())
-    {
-        file >> halloween;
-        file.close();
-    }
-    else { J_Error::log("GAME_ERROR_LOAD_HALLOWEEN"); }
-
     background.quad = { 0, 0, J_Window::getScreenWidth(), J_Window::getScreenHeight() };
     background.colour = { 255, 255, 255, 255, SDL_BLENDMODE_BLEND };
 

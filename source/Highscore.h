@@ -1,20 +1,15 @@
 #ifndef INCLUDE_HIGHSCORE
 #define INCLUDE_HIGHSCORE
 
+static const int HIGHSCORE_TOTAL = 10;
+
 class Highscore
 {
     public:
 
-        static const int TOTAL;
-
         static int save(const int);
         static std::string load();
-
         static void reset();
-
-    private:
-
-        static const std::string FILE;
 };
 
 #endif // INCLUDE_HIGHSCORE

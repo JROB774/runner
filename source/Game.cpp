@@ -1,6 +1,5 @@
 /// GAME //////////////////////////////////////////////////////////////////////
 
-const std::string Game::HALLOWEEN_FILE = RES_DIR_DATA "Halloween.dat";
 J_Background Game::front;
 J_Background Game::back;
 J_Collider Game::ground;
@@ -16,15 +15,6 @@ int Game::state = Game::STATE_TERMINATE;
 
 void Game::initialise (J_Font* a_font)
 {
-    std::ifstream file(HALLOWEEN_FILE);
-
-    if (file.is_open())
-    {
-        file >> halloween;
-        file.close();
-    }
-    else { J_Error::log("GAME_ERROR_LOAD_HALLOWEEN"); }
-
     front.create((halloween) ? "Halloween/Front" : "Front");
     back.create((halloween) ? "Halloween/Back" : "Back");
 

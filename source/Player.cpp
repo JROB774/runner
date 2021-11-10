@@ -1,7 +1,5 @@
 /// J_PLAYER //////////////////////////////////////////////////////////////////
 
-const std::string Player::KEY_FILE = RES_DIR_DATA "Keys.dat";
-const std::string Player::SAVE_FILE = RES_DIR_DATA "Save.dat";
 const J_Point Player::STARTING_POS = { { 10, 100 } };
 J_Point Player::pos = { { 0, 0 } };
 J_Vector Player::vel = { 0, 0 };
@@ -17,22 +15,13 @@ J_Collider Player::collider[3];
 int Player::key[KEY_TOTAL];
 bool Player::slide = false;
 int Player::state = -1;
-
+int Player::currentCharacter = 0;
 
 void Player::initialise(const bool a_halloween)
 {
     pos = STARTING_POS;
 
-    std::ifstream file(SAVE_FILE);
-    std::string player = "\0";
-
-    if (file.is_open())
-    {
-        std::getline(file, player);
-        file.close();
-    }
-    else { J_Error::log("GAME_ERROR_SAVE_LOAD"); }
-
+    std::string player = std::to_string(currentCharacter);
     image.create((a_halloween) ? "Halloween/Player" + player : "Player" + player);
 
     runA.create("Run");
@@ -51,20 +40,6 @@ void Player::initialise(const bool a_halloween)
     collider[STATE_SLIDE].quad.quad = { pos.point.x + 6, pos.point.y + 10, 12, 10 };
 
     for (int i = 0; i < 3; ++i) { collider[i].quad.colour = { 0, 0, 255, 127, SDL_BLENDMODE_BLEND }; }
-
-    file.open(KEY_FILE);
-
-    if (file.is_open())
-    {
-        std::string data;
-        std::getline(file, data);
-        file.close();
-
-        std::istringstream stream;
-        stream.str(data);
-        stream >> key[KEY_JUMP] >> key[KEY_SLIDE] >> key[KEY_PAUSE];
-    }
-    else { J_Error::log("GAME_ERROR_KEY_LOAD"); }
 
     state = STATE_RUN;
 }
@@ -175,6 +150,18 @@ void Player::kill()
 
 
 
+void Player::setKey (int a_key, int a_value)
+{
+    key[a_key] = a_value;
+}
+
+void Player::setCharacter (int a_character)
+{
+    currentCharacter = a_character;
+}
+
+
+
 J_Collider Player::getCollider ()
 {
     J_Collider temp;
@@ -190,9 +177,14 @@ bool Player::isDead ()
     return (state == STATE_DEAD) ? true : false;
 }
 
-int Player::getKey (const int a_key)
+int Player::getKey (int a_key)
 {
     return key[a_key];
+}
+
+int Player::getCharacter ()
+{
+    return currentCharacter;
 }
 
 

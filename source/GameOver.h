@@ -41,7 +41,6 @@ class GameOver
             MEDAL_TOTAL
         };
 
-        static const std::string HALLOWEEN_FILE;
         static J_Quad background;
         static J_Image medal;
         static J_Quad sprite[MEDAL_TOTAL];

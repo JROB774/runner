@@ -54,7 +54,6 @@ class J_System
     private:
 
         static const std::string SYSTEM_FILE;
-        static const std::string CONFIG_FILE;
         static SDL_Event event;
         static J_Timer fpsTimer, capTimer;
         static int fps, tpf;

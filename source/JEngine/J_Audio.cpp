@@ -88,18 +88,27 @@ void J_Mixer::setSoundVolume (const float a_volume)
 {
     soundVolume = a_volume;
 
-    if (soundVolume > MIX_MAX_VOLUME) { soundVolume = MIX_MAX_VOLUME; }
-    else if (soundVolume < 0.0) { soundVolume = 0.0; }
+    if(soundVolume > 1.0f) { soundVolume = 1.0f; }
+    if(soundVolume < 0.0f) { soundVolume = 0.0f; }
 
-    Mix_Volume(-1, (int)soundVolume);
+    int volume = (int)((float)MIX_MAX_VOLUME * soundVolume);
+
+    Mix_Volume(-1, volume);
+}
+
+void J_Mixer::setMute (const bool a_mute)
+{
+    int volume = (int)((float)MIX_MAX_VOLUME * soundVolume);
+
+    muted = a_mute;
+
+    if (muted) { Mix_Volume(-1, 0); }
+    else { Mix_Volume(-1, volume); }
 }
 
 void J_Mixer::toggleMute ()
 {
-    muted = !muted;
-
-    if (muted) { Mix_Volume(-1, 0); }
-    else { Mix_Volume(-1, (int)soundVolume); }
+    setMute(!muted);
 }
 
 

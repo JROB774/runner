@@ -23,9 +23,13 @@ class Player
 
         static void kill();
 
+        static void setKey(int, int);
+        static void setCharacter(int);
+
         static J_Collider getCollider();
         static bool isDead();
-        static int getKey(const int);
+        static int getKey(int);
+        static int getCharacter();
 
         static void terminate();
 
@@ -39,8 +43,6 @@ class Player
             STATE_DEAD
         };
 
-        static const std::string KEY_FILE;
-        static const std::string SAVE_FILE;
         static const J_Point STARTING_POS;
         static J_Point pos;
         static J_Vector vel;
@@ -56,6 +58,7 @@ class Player
         static int key[KEY_TOTAL];
         static bool slide;
         static int state;
+        static int currentCharacter; // @INCOMPLETE
 };
 
 #endif // INCLUDE_PLAYER

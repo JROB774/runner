@@ -34,7 +34,6 @@ class Menu
 
     private:
 
-        static const std::string HALLOWEEN_FILE;
         static J_Quad background;
         static J_Image title;
         static J_Point titlePos;
@@ -74,7 +73,6 @@ class Character
     private:
 
         static const std::string CHARACTER_FILE;
-        static const std::string SAVE_FILE;
         static J_Quad background;
         static J_Image select;
         static J_Image character;
@@ -125,9 +123,6 @@ class Config
 
     private:
 
-        static const std::string KEY_FILE;
-        static const std::string HALLOWEEN_FILE;
-        static const std::string CONFIG_FILE;
         static J_Quad background;
         static J_Font* font;
         static ButtonList button;

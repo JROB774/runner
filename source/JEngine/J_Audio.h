@@ -35,6 +35,7 @@ class J_Mixer
 
         static void setChannels(const int);
         static void setSoundVolume(const float);
+        static void setMute(const bool);
         static void toggleMute();
 
         static int getChannels();

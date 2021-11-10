@@ -42,5 +42,6 @@
 #include "Highscore.h"
 #include "Player.h"
 #include "Menu.h"
+#include "Save.h"
 
 #endif // INCLUDE_MAIN
