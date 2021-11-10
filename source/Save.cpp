@@ -8,13 +8,13 @@ const bool Save::DEFAULT_MUTE = false;
 const std::string Save::DEFAULT_SEASON = "None";
 const int Save::DEFAULT_KEYS[Player::KEY_TOTAL] = { 1073741906, 1073741905, 32 };
 const int Save::DEFAULT_HIGHSCORES[HIGHSCORE_TOTAL] = {};
-const int Save::DEFAULT_CURRENT_CHARACTER = 0;
+const int Save::DEFAULT_CHARACTER = 0;
 
 bool Save::fullscreen;
 float Save::volume;
 bool Save::mute;
 std::string Save::season;
-int Save::currentCharacter;
+int Save::character;
 int Save::keys[Player::KEY_TOTAL];
 int Save::highscores[HIGHSCORE_TOTAL];
 
@@ -27,7 +27,7 @@ void Save::step ()
     float currSoundVolume = J_Mixer::getSoundVolume();
     bool currMute = J_Mixer::isMuted();
     std::string currSeason = "None"; // @INCOMPLETE!
-    int currCurrentCharacter = Player::getCharacter();
+    int currCharacter = Player::getCharacter();
     int currKeys[Player::KEY_TOTAL] = {};
     int currHighscores[HIGHSCORE_TOTAL] = {}; // @ICNOMPLETE!
 
@@ -55,9 +55,9 @@ void Save::step ()
         season = currSeason;
         changed = true;
     }
-    if(currentCharacter != currCurrentCharacter)
+    if(character != currCharacter)
     {
-        currentCharacter = currCurrentCharacter;
+        character = currCharacter;
         changed = true;
     }
     for(int i=0; i<Player::KEY_TOTAL; ++i)
@@ -96,7 +96,7 @@ void Save::reset ()
     Player::setKey(1, DEFAULT_KEYS[1]);
     Player::setKey(2, DEFAULT_KEYS[2]);
     // @INCOMPLETE: Highscores...
-    Player::setCharacter(DEFAULT_CURRENT_CHARACTER);
+    Player::setCharacter(DEFAULT_CHARACTER);
 }
 
 void Save::load ()
@@ -107,7 +107,7 @@ void Save::load ()
     volume = DEFAULT_VOLUME;
     mute = DEFAULT_MUTE;
     season = DEFAULT_SEASON;
-    currentCharacter = DEFAULT_CURRENT_CHARACTER;
+    character = DEFAULT_CHARACTER;
     memcpy(keys, DEFAULT_KEYS, sizeof(keys));
     memcpy(highscores, DEFAULT_HIGHSCORES, sizeof(highscores));
 
@@ -120,7 +120,7 @@ void Save::load ()
              >> volume
              >> mute
              >> season
-             >> currentCharacter
+             >> character
              >> keys[0] >> keys[1] >> keys[2]
              >> highscores[0] >> highscores[1] >> highscores[2] >> highscores[3] >> highscores[4]
              >> highscores[5] >> highscores[6] >> highscores[7] >> highscores[8] >> highscores[9];
@@ -131,7 +131,7 @@ void Save::load ()
     J_Mixer::setSoundVolume(volume);
     J_Mixer::setMute(mute);
     // @INCOMPLETE: Season...
-    Player::setCharacter(currentCharacter);
+    Player::setCharacter(character);
     Player::setKey(0, keys[0]);
     Player::setKey(1, keys[1]);
     Player::setKey(2, keys[2]);
@@ -150,7 +150,7 @@ void Save::save ()
              << volume << " "
              << mute << " "
              << season << " "
-             << currentCharacter << " "
+             << character << " "
              << keys[0] << " " << keys[1] << " " << keys[2] << " "
              << highscores[0] << " " << highscores[1] << " " << highscores[2] << " " << highscores[3] << " " << highscores[4] << " "
              << highscores[5] << " " << highscores[6] << " " << highscores[7] << " " << highscores[8] << " " << highscores[9];
