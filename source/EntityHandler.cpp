@@ -201,13 +201,14 @@ bool EntityHandler::step (const J_Collider& a_player)
         {
             if (J_Collision::collision(a_player, entity.at(i)->getCollider()))
             {
-                if (typeid(*entity.at(i)) == typeid(Collectible))
+                Entity* e = entity.at(i);
+                if (typeid(*e) == typeid(Collectible))
                 {
-                    Collectible* temp = dynamic_cast <Collectible*> (entity.at(i));
+                    Collectible* temp = dynamic_cast <Collectible*> (e);
                     temp->kill();
                     temp = nullptr;
                 }
-                else if (typeid(*entity.at(i)) == typeid(End)) { /* Do nothing. */ }
+                else if (typeid(*e) == typeid(End)) { /* Do nothing. */ }
                 else { return true; }
             }
         }
@@ -241,9 +242,10 @@ int EntityHandler::getScore ()
     {
         for (unsigned int i = 0; i < entity.size(); ++i)
         {
-            if (typeid(*entity.at(i)) == typeid(Collectible))
+            Entity* e = entity.at(i);
+            if (typeid(*e) == typeid(Collectible))
             {
-                Collectible* temp = dynamic_cast <Collectible*> (entity.at(i));
+                Collectible* temp = dynamic_cast <Collectible*> (e);
                 if (temp->isDead()) { score += temp->getScore(); }
                 temp = nullptr;
             }
@@ -282,9 +284,9 @@ void EntityHandler::kill ()
         {
             if (entity.at(i)->getPosition().point.x <= KILL_POINT)
             {
-                if (typeid(*entity.at(i)) == typeid(End)) { --currentRoomCount; }
-
-                entity.at(i)->destroy();
+                Entity* e = entity.at(i);
+                if (typeid(*e) == typeid(End)) { --currentRoomCount; }
+                e->destroy();
                 entity.erase(entity.begin() + i);
             }
         }

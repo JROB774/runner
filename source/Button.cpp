@@ -7,8 +7,6 @@ const int Button::ARROW_WIDTH = 6, Button::ARROW_HEIGHT = 16;
 
 void Button::create (const Type a_type, const int a_x, const int a_y, const std::string a_text, J_Font* a_font, ButtonCallback a_process)
 {
-    if (sprite != nullptr) { destroy(); }
-
     type = a_type;
 
     pos.point.x = a_x, pos.point.y = a_y;
