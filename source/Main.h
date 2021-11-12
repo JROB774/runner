@@ -22,6 +22,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
+#include "Resources/Resources.h"
+
 #include "JEngine/J_Audio.h"
 #include "JEngine/J_Render.h"
 #include "JEngine/J_Collision.h"

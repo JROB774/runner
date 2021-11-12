@@ -30,7 +30,7 @@ set ResourceFile=resource\resources.rc
 set ResourcePath=resource\
 
 set InputResource=resource\resources.res
-set InputSource=source\main.cpp
+set InputSource=source\Main.cpp
 
 set OutputPath=binary\win32\
 set OutputName=RUNNER

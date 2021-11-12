@@ -43,7 +43,7 @@ void J_System::initialise ()
     // If the system is not resetting initialise all the SDL sub-systems.
     if (state != STATE_RESETTING)
     {
-        if (SDL_Init(SDL_INIT_EVERYTHING) != 0) { J_Error::log("J_ERROR_SYSTEM_SDL_INIT"); }
+        if (SDL_Init(SDL_INIT_VIDEO) != 0) { J_Error::log("J_ERROR_SYSTEM_SDL_INIT"); }
         if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 2048) < 0) { J_Error::log("J_ERROR_SYSTEM_MIX_INIT"); }
     }
 
@@ -103,8 +103,10 @@ void J_System::handle ()
 void J_System::stepBegin ()
 {
     // Calculate the average FPS.
+    #ifndef PLATFORM_WEB
     averageFps = frameCount / (fpsTimer.getTicks() / 1000.0);
     if (averageFps > 2000000.0) { averageFps = 0.0; }
+    #endif
 
     // Set the renderer colour to default and clear the screen.
     J_Renderer::setColour(J_Renderer::DEFAULT_COLOUR);
@@ -116,9 +118,11 @@ void J_System::stepEnd ()
     // Update the screen with everyting that needs to be rendered.
     J_Renderer::update();
 
-    // Incrment the frame count.
+    // Increment the frame count.
+    #ifndef PLATFORM_WEB
     int frameTicks = capTimer.getTicks();
     if (frameTicks < tpf) { SDL_Delay(tpf - frameTicks); }
+    #endif
 
     ++frameCount;
 }
