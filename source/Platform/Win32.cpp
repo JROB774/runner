@@ -9,6 +9,8 @@ int main (int argc, char* argv[])
 
         J_System::getFpsTimer()->start();
 
+        J_Window::show();
+
         while (J_System::getState() == J_System::STATE_ACTIVE)
         {
             J_System::getCapTimer()->start();

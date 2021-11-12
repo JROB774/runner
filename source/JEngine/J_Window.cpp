@@ -34,7 +34,7 @@ void J_Window::initialise ()
     else { J_Error::log("J_ERROR_WINDOW_FILE_READ"); }
 
     // The window itself is created using the informaation gathered from the data file.
-    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, startWidth, startHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, startWidth, startHeight, SDL_WINDOW_HIDDEN | SDL_WINDOW_RESIZABLE);
     if (window == nullptr) { J_Error::log("J_ERROR_WINDOW_CREATE"); }
 
     // Set the window's scale.
@@ -76,6 +76,18 @@ void J_Window::handle (const SDL_Event& a_event, const bool a_debug)
 
 
 
+void J_Window::show ()
+{
+    SDL_ShowWindow(window);
+}
+
+void J_Window::hide ()
+{
+    SDL_HideWindow(window);
+}
+
+
+
 void J_Window::setFullscreen (const bool a_fullscreen)
 {
     fullscreen = a_fullscreen;
@@ -113,8 +125,6 @@ void J_Window::updateScale (const bool a_updateRenderScaleAndViewport)
         updateViewport(screenScale);
     }
 }
-
-
 
 void J_Window::updateViewport (const int a_screenScale)
 {
