@@ -15,10 +15,13 @@ if %BuildMode%==Release rc -nologo -i %ResourcePath% %ResourceFile%
 
 call timer.bat "cl %IncludeDirs% %Defines% %CompilerFlags% %CompilerWarnings% -Fe%OutputExecutable% %InputSource% -link %LinkerFlags% %LinkerWarnings% %LibraryDirs% %Libraries% %InputResource%"
 
-pushd %OutputPath%
-if %BuildMode%==Release del %ResourcePath%*.res
-del *.ilk *.res *.obj *.exp *.lib
-popd
-del *.ilk *.res *.obj *.exp *.lib
+del *.obj
+
+if %BuildMode%==Release (
+    if exist %OutputPath%\Resources\ (
+        rmdir /s /q %OutputPath%\Resources\
+    )
+    xcopy assets %OutputPath%\Resources\ /E
+)
 
 endlocal
