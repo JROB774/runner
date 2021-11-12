@@ -1,6 +1,5 @@
 /// ENTITY ////////////////////////////////////////////////////////////////////
 
-bool Entity::halloween = false;
 int Entity::speed = 0;
 
 
@@ -10,13 +9,6 @@ Entity::Entity (const int a_spr_w, const int a_spr_h, const int a_off_x, const i
                 SPRITE_WIDTH(a_spr_w), SPRITE_HEIGHT(a_spr_h),
                 COLLIDER_X_OFFSET(a_off_x), COLLIDER_Y_OFFSET(a_off_y),
                 dead(true) {}
-
-
-
-void Entity::initialise (const bool a_halloween)
-{
-    halloween = a_halloween;
-}
 
 
 
@@ -117,7 +109,7 @@ void Collectible::create (const int a_x)
 {
     pos.point = { a_x, 104 };
 
-    image.create((halloween) ? "Halloween/Collectible" : "Collectible");
+    image.create(Game::getSeasonPath() + "Collectible");
     animation.create("Collectible");
     sound.create("Collectible", 1);
 
@@ -180,7 +172,7 @@ void Pole::create (const int a_x)
 {
     pos.point = { a_x, 84 };
 
-    image.create((halloween) ? "Halloween/Pole" : "Pole");
+    image.create(Game::getSeasonPath() + "Pole");
     animation.create("Pole");
 
     collider.quad.quad = { (pos.point.x + COLLIDER_X_OFFSET), (pos.point.y + COLLIDER_Y_OFFSET), 8, 28 };
@@ -203,7 +195,7 @@ void Spike::create (const int a_x)
 {
     pos.point = { a_x, 100 };
 
-    image.create((halloween) ? "Halloween/Spike" : "Spike");
+    image.create(Game::getSeasonPath() + "Spike");
     animation.create("Spike");
 
     collider.quad.quad = { (pos.point.x + COLLIDER_X_OFFSET), (pos.point.y + COLLIDER_Y_OFFSET), 12, 12 };
@@ -226,7 +218,7 @@ void Wall::create (const int a_x)
 {
     pos.point = { a_x, 60 };
 
-    image.create((halloween) ? "Halloween/Wall" : "Wall");
+    image.create(Game::getSeasonPath() + "Wall");
     animation.create("Wall");
 
     collider.quad.quad = { (pos.point.x + COLLIDER_X_OFFSET), (pos.point.y + COLLIDER_Y_OFFSET), 14, 41 };

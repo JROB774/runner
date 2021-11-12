@@ -96,6 +96,8 @@ class ButtonList
         void increment();
         void decrement();
 
+        Button* getButton(const int);
+
         void destroy();
         ~ButtonList();
 

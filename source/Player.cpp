@@ -15,13 +15,13 @@ J_Collider Player::collider[3];
 int Player::key[KEY_TOTAL];
 bool Player::slide = false;
 int Player::state = -1;
-int Player::currentCharacter = 0;
+int Player::character = 0;
 
-void Player::initialise(const bool a_halloween)
+void Player::initialise()
 {
     pos = STARTING_POS;
 
-    std::string player = "Player" + std::to_string(currentCharacter);
+    std::string player = "Player" + std::to_string(character);
     image.create(player);
 
     runA.create("Run");
@@ -157,7 +157,7 @@ void Player::setKey (int a_key, int a_value)
 
 void Player::setCharacter (int a_character)
 {
-    currentCharacter = a_character;
+    character = a_character;
 }
 
 
@@ -184,7 +184,7 @@ int Player::getKey (int a_key)
 
 int Player::getCharacter ()
 {
-    return currentCharacter;
+    return character;
 }
 
 

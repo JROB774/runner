@@ -11,7 +11,6 @@ int GameOver::startCounter = 0, GameOver::medalCounter = 0;
 bool GameOver::newBest = false;
 ButtonList GameOver::button;
 J_Sound GameOver::tick;
-bool GameOver::halloween = false;
 int GameOver::state = -1;
 
 
@@ -21,7 +20,7 @@ void GameOver::initialise (J_Font* a_font, const int a_score)
     background.quad = { 0, 0, J_Window::getScreenWidth(), J_Window::getScreenHeight() };
     background.colour = { 255, 255, 255, 255, SDL_BLENDMODE_BLEND };
 
-    medal.create((halloween) ? "Halloween/Medal" : "Medal");
+    medal.create(Game::getSeasonPath() + "Medal");
 
     for (int i = 0, ix = 0; i < MEDAL_TOTAL; ++i, ix += 40)
     {

@@ -21,8 +21,13 @@ class Game
 
         static void render();
 
+        static void setSeason(const std::string);
+
         static int getScore();
         static int getState();
+
+        static std::string getSeason();
+        static std::string getSeasonPath();
 
         static void terminate();
 
@@ -36,7 +41,7 @@ class Game
         static J_Quad bar;
         static int score, bestScore;
         static int inputBuffer;
-        static bool halloween;
+        static std::string season;
         static int state;
 };
 

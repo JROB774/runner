@@ -13,7 +13,7 @@ std::vector <Entity*> EntityHandler::entity;
 
 
 
-void EntityHandler::initialise (const bool a_halloween)
+void EntityHandler::initialise ()
 {
     std::ifstream difficultyFile(DIFFICULTY_FILE);
 
@@ -46,8 +46,6 @@ void EntityHandler::initialise (const bool a_halloween)
 
     currentRoomCount = 0;
     roomCount = 0;
-
-    Entity::initialise(a_halloween);
 
     spawn(0);
 

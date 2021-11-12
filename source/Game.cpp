@@ -8,15 +8,15 @@ J_Font Game::bigFont;
 J_Quad Game::bar;
 int Game::score = 0, Game::bestScore = 0;
 int Game::inputBuffer = 0;
-bool Game::halloween = false;
+std::string Game::season = "None";
 int Game::state = Game::STATE_TERMINATE;
 
 
 
 void Game::initialise (J_Font* a_font)
 {
-    front.create((halloween) ? "Halloween/Front" : "Front");
-    back.create((halloween) ? "Halloween/Back" : "Back");
+    front.create(getSeasonPath() + "Front");
+    back.create(getSeasonPath() + "Back");
 
     ground.quad.quad = { 0, (J_Window::getScreenHeight() - (J_Window::getScreenHeight() / 6)),
                          J_Window::getScreenWidth(), (J_Window::getScreenHeight() / 6) };
@@ -32,8 +32,8 @@ void Game::initialise (J_Font* a_font)
     score = 0;
     bestScore = Highscore::save(-1);
 
-    Player::initialise(halloween);
-    EntityHandler::initialise(halloween);
+    Player::initialise();
+    EntityHandler::initialise();
     Entity::setSpeed(3);
 
     inputBuffer = 2;
@@ -150,6 +150,13 @@ void Game::render ()
 
 
 
+void Game::setSeason (const std::string a_season)
+{
+    season = a_season;
+}
+
+
+
 int Game::getScore ()
 {
     return score;
@@ -160,6 +167,18 @@ int Game::getState ()
     return state;
 }
 
+
+
+std::string Game::getSeason ()
+{
+    return season;
+}
+
+std::string Game::getSeasonPath ()
+{
+    if (season == "None") { return ""; }
+    return season + "/";
+}
 
 
 void Game::terminate ()

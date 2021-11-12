@@ -13,7 +13,7 @@ class Player
             KEY_TOTAL
         };
 
-        static void initialise(const bool);
+        static void initialise();
 
         static void handle();
 
@@ -58,7 +58,7 @@ class Player
         static int key[KEY_TOTAL];
         static bool slide;
         static int state;
-        static int currentCharacter; // @INCOMPLETE
+        static int character;
 };
 
 #endif // INCLUDE_PLAYER

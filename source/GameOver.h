@@ -52,7 +52,6 @@ class GameOver
         static bool newBest;
         static ButtonList button;
         static J_Sound tick;
-        static bool halloween;
         static int state;
 };
 

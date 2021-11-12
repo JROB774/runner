@@ -12,8 +12,6 @@ class Entity
         Entity& operator=(const Entity&) = delete;
         Entity& operator=(Entity&&) = delete;
 
-        static void initialise(const bool);
-
         virtual void create(const int) = 0;
 
         void step();
@@ -30,7 +28,6 @@ class Entity
 
     protected:
 
-        static bool halloween;
         static int speed;
 
         J_Point pos;

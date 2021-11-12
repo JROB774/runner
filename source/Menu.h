@@ -42,7 +42,6 @@ class Menu
         static J_Font* font;
         static ButtonList button;
         static J_Sound tick;
-        static bool halloween;
         static int state;
 };
 

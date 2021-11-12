@@ -242,6 +242,14 @@ void ButtonList::decrement ()
 
 
 
+Button* ButtonList::getButton (const int a_index)
+{
+    if(a_index < 0 || a_index >= button.size()) { return nullptr; }
+    return button.at(a_index);
+}
+
+
+
 void ButtonList::destroy ()
 {
     position = 0;

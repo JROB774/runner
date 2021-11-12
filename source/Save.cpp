@@ -26,7 +26,7 @@ void Save::step ()
     bool currFullscreen = J_Window::getFullscreen();
     float currSoundVolume = J_Mixer::getSoundVolume();
     bool currMute = J_Mixer::isMuted();
-    std::string currSeason = "None"; // @INCOMPLETE!
+    std::string currSeason = Game::getSeason();
     int currCharacter = Player::getCharacter();
     int currKeys[Player::KEY_TOTAL] = {};
     int currHighscores[HIGHSCORE_TOTAL] = {}; // @ICNOMPLETE!
@@ -91,7 +91,7 @@ void Save::reset ()
     J_Window::setFullscreen(DEFAULT_FULLSCREEN);
     J_Mixer::setSoundVolume(DEFAULT_VOLUME);
     J_Mixer::setMute(DEFAULT_MUTE);
-    // @INCOMPLETE: Season...
+    Game::setSeason(DEFAULT_SEASON);
     Player::setKey(0, DEFAULT_KEYS[0]);
     Player::setKey(1, DEFAULT_KEYS[1]);
     Player::setKey(2, DEFAULT_KEYS[2]);
@@ -130,7 +130,7 @@ void Save::load ()
     J_Window::setFullscreen(fullscreen);
     J_Mixer::setSoundVolume(volume);
     J_Mixer::setMute(mute);
-    // @INCOMPLETE: Season...
+    Game::setSeason(season);
     Player::setCharacter(character);
     Player::setKey(0, keys[0]);
     Player::setKey(1, keys[1]);

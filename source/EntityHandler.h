@@ -5,7 +5,7 @@ class EntityHandler
 {
     public:
 
-        static void initialise(const bool);
+        static void initialise();
 
         static void spawn(const int = -1, const int = 240);
 

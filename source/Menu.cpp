@@ -8,7 +8,6 @@ bool Menu::titlePlaced = false;
 J_Font* Menu::font = nullptr;
 ButtonList Menu::button;
 J_Sound Menu::tick;
-bool Menu::halloween = false;
 int Menu::state = -1;
 
 
@@ -18,7 +17,7 @@ void Menu::initialise (J_Font* a_font)
     background.quad = { 0, 0, J_Window::getScreenWidth(), J_Window::getScreenHeight() };
     background.colour = { 255, 255, 255, 255, SDL_BLENDMODE_BLEND };
 
-    title.create((halloween) ? "Halloween/Title" : "Title");
+    title.create(Game::getSeasonPath() + "Title");
     titlePos.point = { -J_Window::getScreenWidth(), 0 };
     titleVel = { 6, 0 };
     titlePlaced = false;
@@ -355,9 +354,9 @@ void Config::initialise (J_Font* a_font)
     std::string volumeText = "Volume: " + std::to_string(volumeTengths * 10);
     std::string muteText   = J_Mixer::isMuted() ? "Unmute Sound" : "Mute Sound";
     std::string windowText = J_Window::getFullscreen() ? "Go Windowed" : "Go Fullscreen";
-    std::string seasonText = "Season: None"; // @INCOMPLETE!
+    std::string seasonText = "Season: " + Game::getSeason();
     std::string rebindText = "Rebind Keys";
-    std::string resetText  = "Reset Settings";
+    std::string resetText  = "Reset Config";
     std::string backText   = "Back";
 
     button.create(Button::TYPE_SLIDER, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)volumeText.length()) / 2) - 3, 44, volumeText, font, &setVolume);
@@ -486,7 +485,29 @@ void Config::toggleFullscreen (Button* a_button, const int a_interaction)
 
 void Config::setSeason (Button* a_button, const int a_interaction)
 {
-    // @INCOMPLETE:...
+    static const std::string seasons[] = { "None", "Halloween", "Christmas" };
+
+    int current = 0;
+    for (int i = 0; i < 3; ++i)
+    {
+        if (Game::getSeason() == seasons[i])
+        {
+            current = i;
+            break;
+        }
+    }
+
+    current += a_interaction;
+
+    if (current < 0) { current = 2; }
+    if (current > 2) { current = 0; }
+
+    Game::setSeason(seasons[current]);
+
+    std::string seasonText = "Season: " + Game::getSeason();
+
+    a_button->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)seasonText.length()) / 2) - 3, 68);
+    a_button->updateText(seasonText);
 }
 
 void Config::rebind (Button* a_button, const int a_interaction)
@@ -497,12 +518,27 @@ void Config::rebind (Button* a_button, const int a_interaction)
 
 void Config::reset (Button* a_button, const int a_interaction)
 {
-    J_Window::setFullscreen(Save::DEFAULT_FULLSCREEN);
     J_Mixer::setSoundVolume(Save::DEFAULT_VOLUME);
     J_Mixer::setMute(Save::DEFAULT_MUTE);
-    // @INCOMPLETE: Set season...
+    J_Window::setFullscreen(Save::DEFAULT_FULLSCREEN);
+    Game::setSeason(Save::DEFAULT_SEASON);
 
-    // @INCOMPLETE: UPDATE BUTTON TEXT AND POSITIONS...
+    int volumeTengths = (int)roundf(((J_Mixer::getSoundVolume() * 100.0f) / 10.0f));
+
+    std::string volumeText = "Volume: " + std::to_string(volumeTengths * 10);
+    std::string muteText   = J_Mixer::isMuted() ? "Unmute Sound" : "Mute Sound";
+    std::string windowText = J_Window::getFullscreen() ? "Go Windowed" : "Go Fullscreen";
+    std::string seasonText = "Season: " + Game::getSeason();
+
+    button.getButton(0)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)volumeText.length()) / 2) - 3, 44);
+    button.getButton(1)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)muteText.length())   / 2) - 3, 52);
+    button.getButton(2)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)windowText.length()) / 2) - 3, 60);
+    button.getButton(3)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)seasonText.length()) / 2) - 3, 68);
+
+    button.getButton(0)->updateText(volumeText);
+    button.getButton(1)->updateText(muteText);
+    button.getButton(2)->updateText(windowText);
+    button.getButton(3)->updateText(seasonText);
 }
 
 void Config::menu (Button* a_button, const int a_interaction)
