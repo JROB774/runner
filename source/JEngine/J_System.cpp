@@ -13,6 +13,10 @@ int J_System::state = -1;
 
 void J_System::initialise ()
 {
+    // Need to initialise error before any other sub-system.
+    J_Error::initialise();
+
+
     // Open the system data file to extract the data.
     std::ifstream systemFile(SYSTEM_FILE, std::ifstream::in);
 
@@ -49,7 +53,6 @@ void J_System::initialise ()
 
 
     // Initialise all the J-Engine sub-systems.
-    J_Error::initialise();
     J_Window::initialise();
     J_Renderer::initialise(J_Window::getWindow());
     J_Mixer::initialise();
