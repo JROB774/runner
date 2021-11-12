@@ -79,14 +79,14 @@ void Save::step ()
 
     if(changed)
     {
-        if (J_System::isDebug()) { printf("Changed!\n"); }
+        DEBUG_LOG("Changed!\n");
         save();
     }
 }
 
 void Save::reset ()
 {
-    if (J_System::isDebug()) { printf("Resetting!\n"); }
+    DEBUG_LOG("Resetting!\n");
 
     J_Window::setFullscreen(DEFAULT_FULLSCREEN);
     J_Mixer::setSoundVolume(DEFAULT_VOLUME);
@@ -101,7 +101,7 @@ void Save::reset ()
 
 void Save::load ()
 {
-    if (J_System::isDebug()) { printf("Loading!\n"); }
+    DEBUG_LOG("Loading!\n");
 
     fullscreen = DEFAULT_FULLSCREEN;
     volume = DEFAULT_VOLUME;
@@ -140,7 +140,7 @@ void Save::load ()
 
 void Save::save ()
 {
-    if (J_System::isDebug()) { printf("Saving!\n"); }
+    DEBUG_LOG("Saving!\n");
 
     std::fstream file(SAVE_FILE, std::ios::out);
 

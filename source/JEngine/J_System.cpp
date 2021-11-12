@@ -106,8 +106,6 @@ void J_System::stepBegin ()
     averageFps = frameCount / (fpsTimer.getTicks() / 1000.0);
     if (averageFps > 2000000.0) { averageFps = 0.0; }
 
-    // if (debug) { printf("FPS: %f\n", averageFps); }
-
     // Set the renderer colour to default and clear the screen.
     J_Renderer::setColour(J_Renderer::DEFAULT_COLOUR);
     J_Renderer::clear();
@@ -121,8 +119,6 @@ void J_System::stepEnd ()
     // Incrment the frame count.
     int frameTicks = capTimer.getTicks();
     if (frameTicks < tpf) { SDL_Delay(tpf - frameTicks); }
-
-    // if (debug) { printf("%d : %d\n", frameTicks, tpf - frameTicks); }
 
     ++frameCount;
 }

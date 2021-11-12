@@ -17,6 +17,12 @@
 #define RES_DIR_SOUNDS      "Resources/Sounds/"
 #endif
 
+#ifdef BUILD_DEBUG
+#define DEBUG_LOG(...) printf(__VA_ARGS__)
+#else
+#define DEBUG_LOG(...)
+#endif
+
 class J_System
 {
     public:

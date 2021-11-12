@@ -67,7 +67,7 @@ void EntityHandler::spawn (const int a_roomid, const int a_pos)
         while (difficulty.at(id) > currentDifficulty);
     }
 
-    if (J_System::isDebug()) { printf("Spawning Room: %d (%d)\nTotal Rooms: %d\n", id, difficulty.at(id), roomCount + 1); }
+    DEBUG_LOG("Spawning Room: %d (%d)\nTotal Rooms: %d\n", id, difficulty.at(id), roomCount + 1);
 
     std::string rawRoomData = room.at(id);
 
