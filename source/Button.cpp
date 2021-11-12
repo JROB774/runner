@@ -38,7 +38,7 @@ void Button::render ()
     {
         image.render(pos.point.x, pos.point.y, &sprite[SPRITE_LEFT]);
 
-        for (int ix = (pos.point.x + SPRITE_WIDTH); ix < (pos.point.x + (SPRITE_WIDTH * (text.length() + 1))); ix += SPRITE_WIDTH)
+        for (int ix = (pos.point.x + SPRITE_WIDTH); ix < (pos.point.x + (SPRITE_WIDTH * ((int)text.length() + 1))); ix += SPRITE_WIDTH)
         {
             image.render(ix, pos.point.y, &sprite[SPRITE_MIDDLE]);
         }
@@ -167,7 +167,7 @@ void ButtonList::create (const Button::Type a_type, const int a_x, const int a_y
 
 void ButtonList::render ()
 {
-    for (int i = 0; i < button.size(); ++i) { button.at(i)->render(); }
+    for (size_t i = 0; i < button.size(); ++i) { button.at(i)->render(); }
 }
 
 
@@ -179,7 +179,7 @@ void ButtonList::forward ()
         button.at(position)->deselect();
 
         ++position;
-        if (position >= button.size()) { position = 0; }
+        if (position >= (int)button.size()) { position = 0; }
 
         button.at(position)->select();
     }
@@ -242,7 +242,7 @@ void ButtonList::decrement ()
 
 Button* ButtonList::getButton (const int a_index)
 {
-    if(a_index < 0 || a_index >= button.size()) { return nullptr; }
+    if(a_index < 0 || a_index >= (int)button.size()) { return nullptr; }
     return button.at(a_index);
 }
 
@@ -254,7 +254,7 @@ void ButtonList::destroy ()
 
     if (!button.empty())
     {
-        for (int i = 0; i < button.size(); ++i) { button.at(i)->destroy(); }
+        for (size_t i = 0; i < button.size(); ++i) { button.at(i)->destroy(); }
         button.clear();
     }
 }
