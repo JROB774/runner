@@ -115,6 +115,7 @@ class Config
         static void toggleFullscreen();
         static void toggleHalloween();
         static void rebind();
+        static void reset();
         static void menu();
 
         static int getState();

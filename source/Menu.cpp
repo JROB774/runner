@@ -350,13 +350,14 @@ void Config::initialise (J_Font* a_font)
 
     font = a_font;
 
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2) - 3, 44, "Decrease Volume",   font, &decreaseVolume);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2) - 3, 52, "Increase Volume",   font, &increaseVolume);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2) - 3, 60, "Toggle Mute",       font, &toggleMute);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 17) / 2) - 3, 68, "Toggle Fullscreen", font, &toggleFullscreen);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 16) / 2) - 3, 76, "Toggle Halloween",  font, &toggleHalloween);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2) - 3, 84, "Rebind Keys",       font, &rebind);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3, 92, "Back",              font, &menu);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2) - 3,  44, "Decrease Volume",   font, &decreaseVolume);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2) - 3,  52, "Increase Volume",   font, &increaseVolume);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2) - 3,  60, "Toggle Mute",       font, &toggleMute);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 17) / 2) - 3,  68, "Toggle Fullscreen", font, &toggleFullscreen);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 16) / 2) - 3,  76, "Toggle Halloween",  font, &toggleHalloween);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2) - 3,  84, "Rebind Keys",       font, &rebind);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 14) / 2) - 3,  92, "Reset Settings",    font, &reset);
+    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3, 100, "Back",              font, &menu);
 
     tick.create("Tick", 0);
 
@@ -468,6 +469,14 @@ void Config::rebind ()
 {
     for (int i = 0; i < Player::KEY_TOTAL; ++i) { key[i] = -1; }
     state = STATE_REBIND;
+}
+
+void Config::reset ()
+{
+    J_Window::setFullscreen(Save::DEFAULT_FULLSCREEN);
+    J_Mixer::setSoundVolume(Save::DEFAULT_VOLUME);
+    J_Mixer::setMute(Save::DEFAULT_MUTE);
+    // @INCOMPLETE: Set season...
 }
 
 void Config::menu ()

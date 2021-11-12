@@ -5,6 +5,14 @@ class Save
 {
     public:
 
+        static const bool DEFAULT_FULLSCREEN;
+        static const float DEFAULT_VOLUME;
+        static const bool DEFAULT_MUTE;
+        static const std::string DEFAULT_SEASON;
+        static const int DEFAULT_CHARACTER;
+        static const int DEFAULT_KEYS[Player::KEY_TOTAL];
+        static const int DEFAULT_HIGHSCORES[HIGHSCORE_TOTAL];
+
         static void step();
         static void reset();
         static void load();
@@ -13,14 +21,6 @@ class Save
     private:
 
         static const std::string SAVE_FILE;
-
-        static const bool DEFAULT_FULLSCREEN;
-        static const float DEFAULT_VOLUME;
-        static const bool DEFAULT_MUTE;
-        static const std::string DEFAULT_SEASON;
-        static const int DEFAULT_CHARACTER;
-        static const int DEFAULT_KEYS[Player::KEY_TOTAL];
-        static const int DEFAULT_HIGHSCORES[HIGHSCORE_TOTAL];
 
         static bool fullscreen;
         static float volume;
