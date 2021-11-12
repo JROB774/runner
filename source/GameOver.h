@@ -20,8 +20,8 @@ class GameOver
 
         static void render();
 
-        static void restart();
-        static void menu();
+        static void restart(Button*, const int a_interaction);
+        static void menu(Button*, const int a_interaction);
 
         static int getState();
 

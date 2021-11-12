@@ -1,12 +1,15 @@
 /// BUTTON ////////////////////////////////////////////////////////////////////
 
 const int Button::SPRITE_WIDTH = 4, Button::SPRITE_HEIGHT = 16;
+const int Button::ARROW_WIDTH = 6, Button::ARROW_HEIGHT = 16;
 
 
 
-void Button::create (const int a_x, const int a_y, const std::string a_text, J_Font* a_font, void (*a_process)())
+void Button::create (const Type a_type, const int a_x, const int a_y, const std::string a_text, J_Font* a_font, ButtonCallback a_process)
 {
     if (sprite != nullptr) { destroy(); }
+
+    type = a_type;
 
     pos.point.x = a_x, pos.point.y = a_y;
 
@@ -14,10 +17,13 @@ void Button::create (const int a_x, const int a_y, const std::string a_text, J_F
 
     image.create("Button");
 
-    for (int i = 0, ix = 0; i < SPRITE_TOTAL; ++i, ix += SPRITE_WIDTH)
+    for (int i = 0, ix = 0; i < SPRITE_TOTAL-2; ++i, ix += SPRITE_WIDTH)
     {
         sprite[i].quad = { ix, 0, SPRITE_WIDTH, SPRITE_HEIGHT };
     }
+
+    sprite[SPRITE_LARROW].quad = { 12, 0, ARROW_WIDTH, ARROW_HEIGHT };
+    sprite[SPRITE_RARROW].quad = { 18, 0, ARROW_WIDTH, ARROW_HEIGHT };
 
     font = a_font;
 
@@ -40,6 +46,12 @@ void Button::render ()
         }
 
         image.render(pos.point.x + (SPRITE_WIDTH * ((int)text.length() + 1)), pos.point.y, &sprite[SPRITE_RIGHT]);
+
+        if(type == TYPE_SLIDER)
+        {
+            image.render(pos.point.x - SPRITE_WIDTH, pos.point.y, &sprite[SPRITE_LARROW]);
+            image.render(pos.point.x + (SPRITE_WIDTH * ((int)text.length() + 1)), pos.point.y, &sprite[SPRITE_RARROW]);
+        }
     }
 
     J_Colour grey = { 83, 83, 83, 255, SDL_BLENDMODE_BLEND };
@@ -50,7 +62,19 @@ void Button::render ()
 
 void Button::press ()
 {
-    if (process != nullptr) { (*process)(); }
+    if (process != nullptr) { (*process)(this,0); }
+}
+
+
+
+void Button::increment ()
+{
+    if (process != nullptr) { (*process)(this,+1); }
+}
+
+void Button::decrement ()
+{
+    if (process != nullptr) { (*process)(this,-1); }
 }
 
 
@@ -63,6 +87,25 @@ void Button::select ()
 void Button::deselect ()
 {
     selected = false;
+}
+
+
+
+void Button::updatePosition (const int a_x, const int a_y)
+{
+    pos.point.x = a_x, pos.point.y = a_y;
+}
+
+void Button::updateText (const std::string a_text)
+{
+    text = a_text;
+}
+
+
+
+Button::Type Button::getType () const
+{
+    return type;
 }
 
 
@@ -102,16 +145,21 @@ void ButtonList::initialise ()
     sound.create("Collectible", 0);
 }
 
+void ButtonList::terminate ()
+{
+    sound.destroy();
+}
 
 
-void ButtonList::create (const int a_x, const int a_y, const std::string a_text, J_Font* a_font, void (*a_process)())
+
+void ButtonList::create (const Button::Type a_type, const int a_x, const int a_y, const std::string a_text, J_Font* a_font, ButtonCallback a_process)
 {
     button.push_back(nullptr);
 
     button.back() = new(std::nothrow) Button;
     if (button.back() == nullptr) { J_Error::log("GAME_ERROR_BUTTONLIST_ADD"); }
 
-    button.back()->create(a_x, a_y, a_text, a_font, *a_process);
+    button.back()->create(a_type, a_x, a_y, a_text, a_font, *a_process);
 
     position = 0;
     button.at(position)->select();
@@ -136,8 +184,6 @@ void ButtonList::forward ()
         if (position >= button.size()) { position = 0; }
 
         button.at(position)->select();
-
-        // sound.play(0);
     }
 }
 
@@ -151,8 +197,6 @@ void ButtonList::back ()
         if (position < 0) { position = ((int)button.size() - 1); }
 
         button.at(position)->select();
-
-        // sound.play(0);
     }
 }
 
@@ -162,16 +206,38 @@ void ButtonList::press ()
 {
     if (!button.empty())
     {
-        button.at(position)->press();
-        sound.play(0);
+        if (button.at(position)->getType() == Button::TYPE_PRESS)
+        {
+            button.at(position)->press();
+            sound.play(0);
+        }
     }
 }
 
 
 
-void ButtonList::terminate ()
+void ButtonList::increment ()
 {
-    sound.destroy();
+    if (!button.empty())
+    {
+        if (button.at(position)->getType() == Button::TYPE_SLIDER)
+        {
+            button.at(position)->increment();
+            sound.play(0);
+        }
+    }
+}
+
+void ButtonList::decrement ()
+{
+    if (!button.empty())
+    {
+        if (button.at(position)->getType() == Button::TYPE_SLIDER)
+        {
+            button.at(position)->decrement();
+            sound.play(0);
+        }
+    }
 }
 
 

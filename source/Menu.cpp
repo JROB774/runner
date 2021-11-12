@@ -25,11 +25,11 @@ void Menu::initialise (J_Font* a_font)
 
     font = a_font;
 
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3,  88, "Play",       font, &play);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  9) / 2) - 3,  96, "Character",  font, &character);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 10) / 2) - 3, 104, "Highscores", font, &stats);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  6) / 2) - 3, 112, "Config",     font, &config);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3, 120, "Exit",       font, &exit);
+    button.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3,  88, "Play",       font, &play);
+    button.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  9) / 2) - 3,  96, "Character",  font, &character);
+    button.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 10) / 2) - 3, 104, "Highscores", font, &stats);
+    button.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  6) / 2) - 3, 112, "Config",     font, &config);
+    button.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3, 120, "Exit",       font, &exit);
 
     tick.create("Tick", 0);
 
@@ -101,27 +101,27 @@ void Menu::render ()
 
 
 
-void Menu::play ()
+void Menu::play (Button* a_button, const int a_interaction)
 {
     state = STATE_PLAY;
 }
 
-void Menu::character ()
+void Menu::character (Button* a_button, const int a_interaction)
 {
     state = STATE_CHARACTER;
 }
 
-void Menu::stats ()
+void Menu::stats (Button* a_button, const int a_interaction)
 {
     state = STATE_STATS;
 }
 
-void Menu::config ()
+void Menu::config (Button* a_button, const int a_interaction)
 {
     state = STATE_CONFIG;
 }
 
-void Menu::exit ()
+void Menu::exit (Button* a_button, const int a_interaction)
 {
     J_System::stop();
 }
@@ -190,7 +190,7 @@ void Character::initialise (J_Font* a_font)
 
     currentCharacter = Player::getCharacter();
 
-    button.create(0, 0, "\0", nullptr, &menu);
+    button.create(Button::TYPE_PRESS, 0, 0, "\0", nullptr, &menu);
 
     tick.create("Tick", 0);
 
@@ -287,7 +287,7 @@ void Character::render ()
 
 
 
-void Character::menu ()
+void Character::menu (Button* a_button, const int a_interaction)
 {
     Player::setCharacter(currentCharacter);
     state = STATE_INACTIVE;
@@ -350,14 +350,23 @@ void Config::initialise (J_Font* a_font)
 
     font = a_font;
 
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2) - 3,  44, "Decrease Volume",   font, &decreaseVolume);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 15) / 2) - 3,  52, "Increase Volume",   font, &increaseVolume);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2) - 3,  60, "Toggle Mute",       font, &toggleMute);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 17) / 2) - 3,  68, "Toggle Fullscreen", font, &toggleFullscreen);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 16) / 2) - 3,  76, "Toggle Halloween",  font, &toggleHalloween);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 11) / 2) - 3,  84, "Rebind Keys",       font, &rebind);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 14) / 2) - 3,  92, "Reset Settings",    font, &reset);
-    button.create((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3, 100, "Back",              font, &menu);
+    int volumeTengths = (int)roundf(((J_Mixer::getSoundVolume() * 100.0f) / 10.0f));
+
+    std::string volumeText = "Volume: " + std::to_string(volumeTengths * 10);
+    std::string muteText   = J_Mixer::isMuted() ? "Unmute Sound" : "Mute Sound";
+    std::string windowText = J_Window::getFullscreen() ? "Go Windowed" : "Go Fullscreen";
+    std::string seasonText = "Season: None"; // @INCOMPLETE!
+    std::string rebindText = "Rebind Keys";
+    std::string resetText  = "Reset Settings";
+    std::string backText   = "Back";
+
+    button.create(Button::TYPE_SLIDER, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)volumeText.length()) / 2) - 3, 44, volumeText, font, &setVolume);
+    button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)muteText.length())   / 2) - 3, 52, muteText,   font, &toggleMute);
+    button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)windowText.length()) / 2) - 3, 60, windowText, font, &toggleFullscreen);
+    button.create(Button::TYPE_SLIDER, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)seasonText.length()) / 2) - 3, 68, seasonText, font, &setSeason);
+    button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)rebindText.length()) / 2) - 3, 76, rebindText, font, &rebind);
+    button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)resetText.length())  / 2) - 3, 84, resetText,  font, &reset);
+    button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)backText.length())   / 2) - 3, 92, backText,   font, &menu);
 
     tick.create("Tick", 0);
 
@@ -378,6 +387,9 @@ void Config::handle ()
             {
                 case (SDLK_UP): { tick.play(0); button.back(); break; }
                 case (SDLK_DOWN): { tick.play(0); button.forward(); break; }
+
+                case (SDLK_LEFT): { button.decrement(); break; }
+                case (SDLK_RIGHT): { button.increment(); break; }
 
                 case (SDLK_SPACE): { button.press(); break; }
                 case (SDLK_RETURN): { button.press(); break; }
@@ -440,46 +452,60 @@ void Config::render ()
 
 
 
-void Config::decreaseVolume ()
+void Config::setVolume (Button* a_button, const int a_interaction)
 {
-    // @INCOMPLETE: ...
+    if(a_interaction < 0) { J_Mixer::setSoundVolume(J_Mixer::getSoundVolume() - 0.1f); }
+    if(a_interaction > 0) { J_Mixer::setSoundVolume(J_Mixer::getSoundVolume() + 0.1f); }
+
+    int volumeTengths = (int)roundf(((J_Mixer::getSoundVolume() * 100.0f) / 10.0f));
+    std::string volumeText = "Volume: " + std::to_string(volumeTengths * 10);
+
+    a_button->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)volumeText.length()) / 2) - 3, 44);
+    a_button->updateText(volumeText);
 }
 
-void Config::increaseVolume ()
-{
-    // @INCOMPLETE: ...
-}
-
-void Config::toggleMute ()
+void Config::toggleMute (Button* a_button, const int a_interaction)
 {
     J_Mixer::toggleMute();
+
+    std::string muteText = J_Mixer::isMuted() ? "Unmute Sound" : "Mute Sound";
+
+    a_button->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)muteText.length()) / 2) - 3, 52);
+    a_button->updateText(muteText);
 }
 
-void Config::toggleFullscreen ()
+void Config::toggleFullscreen (Button* a_button, const int a_interaction)
 {
     J_Window::toggleFullscreen();
+
+    std::string windowText = J_Window::getFullscreen() ? "Go Windowed" : "Go Fullscreen";
+
+    a_button->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)windowText.length()) / 2) - 3, 60);
+    a_button->updateText(windowText);
 }
 
-void Config::toggleHalloween ()
+void Config::setSeason (Button* a_button, const int a_interaction)
 {
     // @INCOMPLETE:...
 }
 
-void Config::rebind ()
+void Config::rebind (Button* a_button, const int a_interaction)
 {
     for (int i = 0; i < Player::KEY_TOTAL; ++i) { key[i] = -1; }
     state = STATE_REBIND;
 }
 
-void Config::reset ()
+void Config::reset (Button* a_button, const int a_interaction)
 {
     J_Window::setFullscreen(Save::DEFAULT_FULLSCREEN);
     J_Mixer::setSoundVolume(Save::DEFAULT_VOLUME);
     J_Mixer::setMute(Save::DEFAULT_MUTE);
     // @INCOMPLETE: Set season...
+
+    // @INCOMPLETE: UPDATE BUTTON TEXT AND POSITIONS...
 }
 
-void Config::menu ()
+void Config::menu (Button* a_button, const int a_interaction)
 {
     state = STATE_INACTIVE;
 }
@@ -533,11 +559,11 @@ void Stat::initialise (J_Font* a_font)
 
     update();
 
-    buttonMain.create(0, (J_Window::getScreenHeight() - 14), "Back", font, &menu);
-    buttonMain.create((J_Window::getScreenWidth() - ((font->getCharWidth() * 7))), (J_Window::getScreenHeight() - 14), "Reset", font, &reset);
+    buttonMain.create(Button::TYPE_PRESS, 0, (J_Window::getScreenHeight() - 14), "Back", font, &menu);
+    buttonMain.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() - ((font->getCharWidth() * 7))), (J_Window::getScreenHeight() - 14), "Reset", font, &reset);
 
-    buttonReset.create(0, (J_Window::getScreenHeight() - 14), "No", font, &no);
-    buttonReset.create((J_Window::getScreenWidth() - ((font->getCharWidth() * 5))), (J_Window::getScreenHeight() - 14), "Yes", font, &yes);
+    buttonReset.create(Button::TYPE_PRESS, 0, (J_Window::getScreenHeight() - 14), "No", font, &no);
+    buttonReset.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() - ((font->getCharWidth() * 5))), (J_Window::getScreenHeight() - 14), "Yes", font, &yes);
 
     tick.create("Tick", 1);
 
@@ -618,22 +644,22 @@ void Stat::render ()
 
 
 
-void Stat::menu ()
+void Stat::menu (Button* a_button, const int a_interaction)
 {
     state = STATE_INACTIVE;
 }
 
-void Stat::reset ()
+void Stat::reset (Button* a_button, const int a_interaction)
 {
     state = STATE_RESETTING;
 }
 
-void Stat::no ()
+void Stat::no (Button* a_button, const int a_interaction)
 {
     state = STATE_ACTIVE;
 }
 
-void Stat::yes ()
+void Stat::yes (Button* a_button, const int a_interaction)
 {
     Highscore::reset();
     update();

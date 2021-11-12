@@ -81,14 +81,27 @@ int J_Math::random (const int a_min, const int a_max)
 
 
 
-double J_Math::toRadians (const double a_degrees)
+float J_Math::toRadians (const float a_degrees)
 {
-    return (a_degrees * PI) / 180;
+    return (a_degrees * PI) / 180.0f;
 }
 
-double J_Math::toDegrees (const double a_radians)
+float J_Math::toDegrees (const float a_radians)
 {
-    return (a_radians * 180) / PI;
+    return (a_radians * 180.0f) / PI;
+}
+
+
+
+float J_Math::roundToMultiple (const float a_num, const float a_multiple)
+{
+    if (a_multiple == 0) { return a_num; }
+
+    float rem = fmod(abs(a_num), a_multiple);
+    if (rem == 0) { return a_num; }
+
+    if (a_num < 0) { return -(abs(a_num) - rem); }
+    else { return a_num + a_multiple - rem; }
 }
 
 /// J_MATH ////////////////////////////////////////////////////////////////////

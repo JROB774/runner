@@ -22,11 +22,11 @@ class Menu
 
         static void render();
 
-        static void play();
-        static void character();
-        static void stats();
-        static void config();
-        static void exit();
+        static void play(Button*, const int);
+        static void character(Button*, const int);
+        static void stats(Button*, const int);
+        static void config(Button*, const int);
+        static void exit(Button*, const int);
 
         static int getState();
 
@@ -64,7 +64,7 @@ class Character
 
         static void render();
 
-        static void menu();
+        static void menu(Button*, const int);
 
         static int getState();
 
@@ -109,14 +109,13 @@ class Config
 
         static void render();
 
-        static void decreaseVolume();
-        static void increaseVolume();
-        static void toggleMute();
-        static void toggleFullscreen();
-        static void toggleHalloween();
-        static void rebind();
-        static void reset();
-        static void menu();
+        static void setVolume(Button*, const int);
+        static void toggleMute(Button*, const int);
+        static void toggleFullscreen(Button*, const int);
+        static void setSeason(Button*, const int);
+        static void rebind(Button*, const int);
+        static void reset(Button*, const int);
+        static void menu(Button*, const int);
 
         static int getState();
 
@@ -151,10 +150,10 @@ class Stat
 
         static void render();
 
-        static void menu();
-        static void reset();
-        static void no();
-        static void yes();
+        static void menu(Button*, const int);
+        static void reset(Button*, const int);
+        static void no(Button*, const int);
+        static void yes(Button*, const int);
 
         static int getState();
 

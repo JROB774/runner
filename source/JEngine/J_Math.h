@@ -59,8 +59,10 @@ class J_Math
         static int random();
         static int random(const int, const int);
 
-        static double toRadians(const double);
-        static double toDegrees(const double);
+        static float toRadians(const float);
+        static float toDegrees(const float);
+
+        static float roundToMultiple(const float, const float);
 };
 
 #endif // INCLUDE_J_MATH

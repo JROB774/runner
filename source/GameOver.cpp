@@ -43,8 +43,8 @@ void GameOver::initialise (J_Font* a_font, const int a_score)
     startCounter = 60;
     medalCounter = 60;
 
-    button.create(0, (J_Window::getScreenHeight() - 14), "Restart", font, &restart);
-    button.create((J_Window::getScreenWidth() - ((font->getCharWidth() * 6))), (J_Window::getScreenHeight() - 14), "Menu", font, &menu);
+    button.create(Button::TYPE_PRESS, 0, (J_Window::getScreenHeight() - 14), "Restart", font, &restart);
+    button.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() - ((font->getCharWidth() * 6))), (J_Window::getScreenHeight() - 14), "Menu", font, &menu);
 
     tick.create("Tick", 3);
 
@@ -173,12 +173,12 @@ void GameOver::render ()
 
 
 
-void GameOver::restart ()
+void GameOver::restart (Button* a_button, const int a_interaction)
 {
     state = STATE_RESTART;
 }
 
-void GameOver::menu ()
+void GameOver::menu (Button* a_button, const int a_interaction)
 {
     state = STATE_MENU;
 }
