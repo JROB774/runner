@@ -17,3 +17,5 @@ set OutputPath=binary\web\
 set OutputName=RUNNER
 
 set OutputExecutable=%OutputPath%%OutputName%
+
+set Version=1.3.0
