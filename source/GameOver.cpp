@@ -77,7 +77,6 @@ void GameOver::handle ()
                     case (SDLK_RIGHT): { tick.play(0); button.forward(); break; }
 
                     case (SDLK_SPACE): { button.press(); break; }
-                    case (SDLK_RETURN): { button.press(); break; }
                 }
             }
         }

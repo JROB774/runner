@@ -61,7 +61,6 @@ void Menu::handle ()
                     case (SDLK_DOWN): { tick.play(0); button.forward(); break; }
 
                     case (SDLK_SPACE): { button.press(); break; }
-                    case (SDLK_RETURN): { button.press(); break; }
                 }
             }
         }
@@ -253,7 +252,6 @@ void Character::handle ()
                 }
 
                 case (SDLK_SPACE): { button.press(); break; }
-                case (SDLK_RETURN): { button.press(); break; }
             }
         }
     }
@@ -393,7 +391,6 @@ void Config::handle ()
                 case (SDLK_RIGHT): { button.increment(); break; }
 
                 case (SDLK_SPACE): { button.press(); break; }
-                case (SDLK_RETURN): { button.press(); break; }
             }
         }
     }
@@ -629,7 +626,6 @@ void Stat::handle ()
                 case (SDLK_RIGHT): { tick.play(0); buttonMain.forward(); break; }
 
                 case (SDLK_SPACE): { buttonMain.press(); break; }
-                case (SDLK_RETURN): { buttonMain.press(); break; }
             }
         }
     }
@@ -643,7 +639,6 @@ void Stat::handle ()
                 case (SDLK_RIGHT): { tick.play(0); buttonReset.forward(); break; }
 
                 case (SDLK_SPACE): { buttonReset.press(); break; }
-                case (SDLK_RETURN): { buttonReset.press(); break; }
             }
         }
     }
