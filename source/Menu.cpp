@@ -421,6 +421,12 @@ void Config::handle ()
 
 void Config::render ()
 {
+    #ifdef PLATFORM_WEB
+    std::string windowText = J_Window::getFullscreen() ? "Go Windowed" : "Go Fullscreen";
+    button.getButton(2)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)windowText.length()) / 2) - 3, 60);
+    button.getButton(2)->updateText(windowText);
+    #endif
+
     if (state == STATE_ACTIVE)
     {
          J_Renderer::drawQuadFilled(background);

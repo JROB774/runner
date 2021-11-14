@@ -9,6 +9,8 @@ class J_Window
 
         static void handle(const SDL_Event&, const bool);
 
+        static void step();
+
         static void show();
         static void hide();
 

@@ -75,6 +75,17 @@ void J_Window::handle (const SDL_Event& a_event, const bool a_debug)
 
 
 
+void J_Window::step ()
+{
+    // Monitor if the fullscreen state has changed and update the flag accordingly.
+    // This is needed on the web where forces external to the game can change the
+    // fullscreen state. If we don't update this then the flag will be out of sync.
+    bool isFullscreen = SDL_GetWindowFlags(window) & (SDL_WINDOW_FULLSCREEN|SDL_WINDOW_FULLSCREEN_DESKTOP);
+    if(isFullscreen != fullscreen) { fullscreen = isFullscreen;  }
+}
+
+
+
 void J_Window::show ()
 {
     SDL_ShowWindow(window);

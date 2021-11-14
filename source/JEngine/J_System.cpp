@@ -104,6 +104,8 @@ void J_System::handle ()
 
 void J_System::stepBegin ()
 {
+    J_Window::step();
+
     // Set the renderer colour to default and clear the screen.
     J_Renderer::setColour(J_Renderer::DEFAULT_COLOUR);
     J_Renderer::clear();
