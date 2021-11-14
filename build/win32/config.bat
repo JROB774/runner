@@ -1,9 +1,6 @@
 @echo off
 
-:: Can be either "x86" or "amd64"
 set Architecture=amd64
-:: Can be either "Debug" or "Release"
-set BuildMode=Debug
 
 set Libraries=SDL2main.lib SDL2.lib SDL2_mixer.lib user32.lib shell32.lib setargv.obj
 
@@ -35,11 +32,11 @@ set InputSource=source\Main.cpp
 set OutputPath=binary\win32\
 set OutputName=RUNNER
 
-if %BuildMode%==Release (
+if %BuildMode%==release (
     set CompilerFlags=%CompilerFlags%
     set LinkerFlags=%LinkerFlags% -subsystem:windows
 )
-if %BuildMode%==Debug (
+if %BuildMode%==debug (
     set InputResource=
     set LinkerFlags=%LinkerFlags% -subsystem:console
     set Defines=%Defines% -D BUILD_DEBUG
