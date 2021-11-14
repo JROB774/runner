@@ -91,6 +91,8 @@ void J_Window::setFullscreen (const bool a_fullscreen)
 {
     fullscreen = a_fullscreen;
 
+    SDL_ShowCursor((fullscreen) ? SDL_DISABLE : SDL_ENABLE);
+
     if(fullscreen)
     {
         SDL_GetWindowSize(window, &cachedWidth, &cachedHeight); // Cache the current width and height in windowed mode.

@@ -3,8 +3,8 @@
 const std::string Save::SAVE_FILE = "save.dat";
 
 const bool Save::DEFAULT_FULLSCREEN = false;
-const int Save::DEFAULT_WINDOW_WIDTH = -1;
-const int Save::DEFAULT_WINDOW_HEIGHT = -1;
+const int Save::DEFAULT_WINDOW_WIDTH = 0;
+const int Save::DEFAULT_WINDOW_HEIGHT = 0;
 const float Save::DEFAULT_VOLUME = 1.0f;
 const bool Save::DEFAULT_MUTE = false;
 const std::string Save::DEFAULT_SEASON = "None";

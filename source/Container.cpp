@@ -6,8 +6,6 @@ J_Font Container::font;
 
 void Container::initialise ()
 {
-    if (SDL_ShowCursor(SDL_DISABLE) < 0) { J_Error::log("GAME_ERROR_HIDE_CURSOR"); }
-
     font.create("Font");
 
     Menu::initialise(&font);
