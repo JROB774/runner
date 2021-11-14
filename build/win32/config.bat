@@ -36,6 +36,8 @@ set OutputExecutable=%OutputPath%%OutputName%
 
 set Version=1.3.0
 
+if "%BuildMode%"=="" goto end
+
 if %BuildMode%==debug goto debug
 if %BuildMode%==release goto release
 if %BuildMode%==final goto release
