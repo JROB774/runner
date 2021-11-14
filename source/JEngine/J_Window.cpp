@@ -195,7 +195,7 @@ int J_Window::getWidth ()
     int width;
     if (fullscreen) { width = cachedWidth; }
     else { SDL_GetWindowSize(window, &width, NULL); }
-    return (width == startWidth) ? -1 : width;
+    return (width == startWidth) ? 0 : width;
 }
 
 int J_Window::getHeight ()
@@ -203,7 +203,7 @@ int J_Window::getHeight ()
     int height;
     if (fullscreen) { height = cachedHeight; }
     else { SDL_GetWindowSize(window, NULL, &height); }
-    return (height == startHeight) ? -1 : height;
+    return (height == startHeight) ? 0 : height;
 }
 
 bool J_Window::getFullscreen ()
