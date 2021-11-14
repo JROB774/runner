@@ -80,7 +80,7 @@ void J_Error::log (const std::string a_key)
     delete[] data;
     data = nullptr;
 
-    std::ofstream errorLog(ERROR_LOG, std::ofstream::app);
+    std::ofstream errorLog(FILESYS_NAME(ERROR_LOG), std::ofstream::app);
 
     if (errorLog.is_open())
     {
@@ -94,6 +94,8 @@ void J_Error::log (const std::string a_key)
 
         errorLog << "\n";
         errorLog.close();
+
+        FILESYS_SYNC();
     }
     else { messageBox("FATAL ERROR\nCould not write an error to the log!"); }
 

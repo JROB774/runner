@@ -101,7 +101,7 @@ void Save::load ()
     memcpy(keys, DEFAULT_KEYS, sizeof(keys));
     memcpy(highscores, DEFAULT_HIGHSCORES, sizeof(highscores));
 
-    std::fstream file(SAVE_FILE, std::ios::in);
+    std::fstream file(FILESYS_NAME(SAVE_FILE), std::ios::in);
 
     // If there's no save file we just use the default values.
     if(file.is_open())
@@ -130,6 +130,8 @@ void Save::load ()
     Player::setKey(1, keys[1]);
     Player::setKey(2, keys[2]);
     // @INCOMPLETE: Highscores...
+
+    FILESYS_SYNC();
 }
 
 void Save::save ()
@@ -139,7 +141,7 @@ void Save::save ()
     int windowWidth = J_Window::getWidth();
     int windowHeight = J_Window::getHeight();
 
-    std::fstream file(SAVE_FILE, std::ios::out);
+    std::fstream file(FILESYS_NAME(SAVE_FILE), std::ios::out);
 
     if(file.is_open())
     {
@@ -156,6 +158,8 @@ void Save::save ()
         file.close();
     }
     else { J_Error::log("GAME_ERROR_SAVE"); }
+
+    FILESYS_SYNC();
 }
 
 /// SAVE //////////////////////////////////////////////////////////////////////

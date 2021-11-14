@@ -1,7 +1,5 @@
 /// WEB ///////////////////////////////////////////////////////////////////////
 
-#include <emscripten.h>
-
 void main_loop ()
 {
     static Uint64 performanceFrequency = SDL_GetPerformanceFrequency();
@@ -41,7 +39,7 @@ void main_loop ()
     }
 }
 
-int main (int argc, char* argv[])
+void main_start_cpp ()
 {
     J_System::initialise();
     Container::initialise();
@@ -49,8 +47,30 @@ int main (int argc, char* argv[])
     J_Window::show();
 
     emscripten_set_main_loop(main_loop, -1, 1);
+}
 
-    return 0;
+extern "C"
+{
+    void main_start ()
+    {
+        main_start_cpp();
+    }
+
+    int main (int argc, char* argv[])
+    {
+        EM_ASM
+        (
+            FS.mkdir("/RUNNER");
+            FS.mount(IDBFS, {}, "/RUNNER");
+            FS.syncfs(true, function(err)
+            {
+                assert(!err);
+                ccall("main_start");
+            });
+        );
+
+        return 0;
+    }
 }
 
 /// WEB ///////////////////////////////////////////////////////////////////////

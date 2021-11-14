@@ -1,6 +1,10 @@
 #ifndef INCLUDE_MAIN
 #define INCLUDE_MAIN
 
+#ifdef PLATFORM_WEB
+#include <emscripten.h>
+#endif
+
 #include <cstring>
 #include <cmath>
 #include <cstdlib>
