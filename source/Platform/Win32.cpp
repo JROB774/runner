@@ -20,6 +20,20 @@ int main (int argc, char* argv[])
         {
             while (J_System::pollEvent() != 0)
             {
+                SDL_Event event = J_System::getEvent();
+                if(event.type == SDL_KEYDOWN)
+                {
+                    switch(event.key.keysym.sym)
+                    {
+                        case (SDLK_RETURN) : { if (!(SDL_GetModState()&KMOD_ALT)) { break; } }
+                        case (SDLK_F11) :
+                        {
+                            J_Window::toggleFullscreen();
+                            break;
+                        }
+                    }
+                }
+
                 J_System::handle();
                 Container::handle();
             }
