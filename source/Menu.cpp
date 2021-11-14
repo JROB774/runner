@@ -28,7 +28,9 @@ void Menu::initialise (J_Font* a_font)
     button.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  9) / 2) - 3,  96, "Character",  font, &character);
     button.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 10) / 2) - 3, 104, "Highscores", font, &stats);
     button.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  6) / 2) - 3, 112, "Config",     font, &config);
+    #ifndef PLATFORM_WEB // We don't need or want an exit button on web builds!
     button.create(Button::TYPE_PRESS, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() *  4) / 2) - 3, 120, "Exit",       font, &exit);
+    #endif
 
     tick.create("Tick", 0);
 
