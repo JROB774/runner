@@ -2,7 +2,7 @@
 
 const std::string Save::SAVE_FILE = "save.dat";
 
-const bool Save::DEFAULT_FULLSCREEN = true;
+const bool Save::DEFAULT_FULLSCREEN = false;
 const float Save::DEFAULT_VOLUME = 1.0f;
 const bool Save::DEFAULT_MUTE = false;
 const std::string Save::DEFAULT_SEASON = "None";
