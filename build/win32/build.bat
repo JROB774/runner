@@ -52,7 +52,7 @@ goto end
 
 :package
 pushd %OutputPath%
-set ZipName=%OutputName%-v%Version%-Windows.zip
+set ZipName=%OutputName%.zip
 if exist %ZipName% rm %ZipName%
 tar -a -c --exclude=save.dat --exclude=*.log --exclude=*.pdb --transform 's,^,RUNNER/,' -f %ZipName% *
 popd
