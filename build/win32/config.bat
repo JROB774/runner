@@ -32,19 +32,23 @@ set InputSource=source\Main.cpp
 set OutputPath=binary\win32\
 set OutputName=RUNNER
 
-if %BuildMode%==release (
-    set CompilerFlags=%CompilerFlags%
-    set LinkerFlags=%LinkerFlags% -subsystem:windows
-)
-if %BuildMode%==debug (
-    set InputResource=
-    set LinkerFlags=%LinkerFlags% -subsystem:console
-    set Defines=%Defines% -D BUILD_DEBUG
-)
-
-if %Architecture%==x86 (
-    set CompilerFlags=%CompilerFlags% -arch:IA32
-    set LinkerFlags=%LinkerFlags%,5.1
-)
-
 set OutputExecutable=%OutputPath%%OutputName%
+
+set Version=1.3.0
+
+if %BuildMode%==debug goto debug
+if %BuildMode%==release goto release
+if %BuildMode%==final goto release
+
+:debug
+set InputResource=
+set LinkerFlags=%LinkerFlags% -subsystem:console
+set Defines=%Defines% -D BUILD_DEBUG
+goto end
+
+:release
+set CompilerFlags=%CompilerFlags%
+set LinkerFlags=%LinkerFlags% -subsystem:windows
+goto end
+
+:end
