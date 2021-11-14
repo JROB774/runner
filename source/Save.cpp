@@ -3,6 +3,8 @@
 const std::string Save::SAVE_FILE = "save.dat";
 
 const bool Save::DEFAULT_FULLSCREEN = false;
+const int Save::DEFAULT_WINDOW_WIDTH = -1;
+const int Save::DEFAULT_WINDOW_HEIGHT = -1;
 const float Save::DEFAULT_VOLUME = 1.0f;
 const bool Save::DEFAULT_MUTE = false;
 const std::string Save::DEFAULT_SEASON = "None";
@@ -84,24 +86,12 @@ void Save::step ()
     }
 }
 
-void Save::reset ()
-{
-    DEBUG_LOG("Resetting!\n");
-
-    J_Window::setFullscreen(DEFAULT_FULLSCREEN);
-    J_Mixer::setSoundVolume(DEFAULT_VOLUME);
-    J_Mixer::setMute(DEFAULT_MUTE);
-    Game::setSeason(DEFAULT_SEASON);
-    Player::setKey(0, DEFAULT_KEYS[0]);
-    Player::setKey(1, DEFAULT_KEYS[1]);
-    Player::setKey(2, DEFAULT_KEYS[2]);
-    // @INCOMPLETE: Highscores...
-    Player::setCharacter(DEFAULT_CHARACTER);
-}
-
 void Save::load ()
 {
     DEBUG_LOG("Loading!\n");
+
+    int windowWidth = DEFAULT_WINDOW_WIDTH;
+    int windowHeight = DEFAULT_WINDOW_HEIGHT;
 
     fullscreen = DEFAULT_FULLSCREEN;
     volume = DEFAULT_VOLUME;
@@ -117,6 +107,8 @@ void Save::load ()
     if(file.is_open())
     {
         file >> fullscreen
+             >> windowWidth
+             >> windowHeight
              >> volume
              >> mute
              >> season
@@ -127,6 +119,8 @@ void Save::load ()
         file.close();
     }
 
+    J_Window::setWidth(windowWidth); // Needs to be before fullscreen to set correctly!
+    J_Window::setHeight(windowHeight); // Needs to be before fullscreen to set correctly!
     J_Window::setFullscreen(fullscreen);
     J_Mixer::setSoundVolume(volume);
     J_Mixer::setMute(mute);
@@ -142,11 +136,16 @@ void Save::save ()
 {
     DEBUG_LOG("Saving!\n");
 
+    int windowWidth = J_Window::getWidth();
+    int windowHeight = J_Window::getHeight();
+
     std::fstream file(SAVE_FILE, std::ios::out);
 
     if(file.is_open())
     {
         file << fullscreen << " "
+             << windowWidth << " "
+             << windowHeight << " "
              << volume << " "
              << mute << " "
              << season << " "

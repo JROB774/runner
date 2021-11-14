@@ -6,6 +6,8 @@ class Save
     public:
 
         static const bool DEFAULT_FULLSCREEN;
+        static const int DEFAULT_WINDOW_WIDTH;
+        static const int DEFAULT_WINDOW_HEIGHT;
         static const float DEFAULT_VOLUME;
         static const bool DEFAULT_MUTE;
         static const std::string DEFAULT_SEASON;
@@ -14,7 +16,6 @@ class Save
         static const int DEFAULT_HIGHSCORES[HIGHSCORE_TOTAL];
 
         static void step();
-        static void reset();
         static void load();
         static void save();
 

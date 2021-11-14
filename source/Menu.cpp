@@ -521,6 +521,8 @@ void Config::reset (Button* a_button, const int a_interaction)
     J_Mixer::setSoundVolume(Save::DEFAULT_VOLUME);
     J_Mixer::setMute(Save::DEFAULT_MUTE);
     J_Window::setFullscreen(Save::DEFAULT_FULLSCREEN);
+    J_Window::setWidth(Save::DEFAULT_WINDOW_WIDTH);
+    J_Window::setHeight(Save::DEFAULT_WINDOW_HEIGHT);
     Game::setSeason(Save::DEFAULT_SEASON);
 
     int volumeTengths = (int)roundf(((J_Mixer::getSoundVolume() * 100.0f) / 10.0f));

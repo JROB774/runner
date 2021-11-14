@@ -2,7 +2,9 @@
 
 const std::string J_Window::WINDOW_FILE = RES_DIR_DATA "Window.dat";
 std::string J_Window::title = "\0";
-int J_Window::width = 0, J_Window::height = 0;
+int J_Window::startWidth = 0, J_Window::startHeight = 0;
+int J_Window::cachedWidth = 0, J_Window::cachedHeight = 0;
+int J_Window::screenWidthScaled = 0, J_Window::screenHeightScaled = 0;
 int J_Window::screenWidth = 0, J_Window::screenHeight = 0;
 bool J_Window::fullscreen = false;
 SDL_Window* J_Window::window = nullptr;
@@ -16,9 +18,6 @@ void J_Window::initialise ()
 
     // Open the window data file to extract data.
     std::ifstream windowFile(WINDOW_FILE, std::ifstream::in);
-
-    int startWidth = 0;
-    int startHeight = 0;
 
     if (windowFile.is_open())
     {
@@ -92,6 +91,11 @@ void J_Window::setFullscreen (const bool a_fullscreen)
 {
     fullscreen = a_fullscreen;
 
+    if(fullscreen)
+    {
+        SDL_GetWindowSize(window, &cachedWidth, &cachedHeight); // Cache the current width and height in windowed mode.
+    }
+
     if (fullscreen) { if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP) != 0) { J_Error::log("J_ERROR_WINDOW_FULLSCREEN_ON"); } }
     else { if (SDL_SetWindowFullscreen(window, 0) != 0) { J_Error::log("J_ERROR_WINDOW_FULLSCREEN_OFF"); } }
 }
@@ -99,6 +103,28 @@ void J_Window::setFullscreen (const bool a_fullscreen)
 void J_Window::toggleFullscreen ()
 {
     setFullscreen(!fullscreen);
+}
+
+
+
+void J_Window::setWidth (int a_width)
+{
+    if (fullscreen) { return; }
+    int height;
+    if (a_width <= 0) { a_width = startWidth; }
+    SDL_GetWindowSize(window, NULL, &height);
+    SDL_SetWindowSize(window, a_width, height);
+    SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+}
+
+void J_Window::setHeight (int a_height)
+{
+    if (fullscreen) { return; }
+    if (a_height <= 0) { a_height = startHeight; }
+    int width;
+    SDL_GetWindowSize(window, &width, NULL);
+    SDL_SetWindowSize(window, width, a_height);
+    SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 }
 
 
@@ -115,8 +141,8 @@ void J_Window::updateScale (const bool a_updateRenderScaleAndViewport)
         screenScale++;
     }
 
-    width = screenWidth * screenScale;
-    height = screenHeight * screenScale;
+    screenWidthScaled = screenWidth * screenScale;
+    screenHeightScaled = screenHeight * screenScale;
 
     // Set the renderer scale and viewport.
     if(a_updateRenderScaleAndViewport)
@@ -132,8 +158,8 @@ void J_Window::updateViewport (const int a_screenScale)
     SDL_GetWindowSize(window, &windowWidth, &windowHeight);
 
     J_Quad viewport;
-    viewport.quad.x = ((windowWidth - width) / 2) / a_screenScale;
-    viewport.quad.y = ((windowHeight - height) / 2) / a_screenScale;
+    viewport.quad.x = ((windowWidth - screenWidthScaled) / 2) / a_screenScale;
+    viewport.quad.y = ((windowHeight - screenHeightScaled) / 2) / a_screenScale;
     viewport.quad.w = screenWidth;
     viewport.quad.h = screenHeight;
 
@@ -142,14 +168,14 @@ void J_Window::updateViewport (const int a_screenScale)
 
 
 
-int J_Window::getWidth ()
+int J_Window::getScreenWidthScaled ()
 {
-    return width;
+    return screenWidthScaled;
 }
 
-int J_Window::getHeight ()
+int J_Window::getScreenHeightScaled ()
 {
-    return height;
+    return screenHeightScaled;
 }
 
 int J_Window::getScreenWidth ()
@@ -160,6 +186,22 @@ int J_Window::getScreenWidth ()
 int J_Window::getScreenHeight ()
 {
     return screenHeight;
+}
+
+int J_Window::getWidth ()
+{
+    int width;
+    if (fullscreen) { width = cachedWidth; }
+    else { SDL_GetWindowSize(window, &width, NULL); }
+    return (width == startWidth) ? -1 : width;
+}
+
+int J_Window::getHeight ()
+{
+    int height;
+    if (fullscreen) { height = cachedHeight; }
+    else { SDL_GetWindowSize(window, NULL, &height); }
+    return (height == startHeight) ? -1 : height;
 }
 
 bool J_Window::getFullscreen ()
@@ -179,7 +221,9 @@ void J_Window::terminate ()
     if (window != nullptr)
     {
         title = "\0";
-        width = 0, height = 0;
+        startWidth = 0, startHeight = 0;
+        cachedWidth = 0, cachedHeight = 0;
+        screenWidthScaled = 0, screenHeightScaled = 0;
         screenWidth = 0, screenHeight = 0;
         fullscreen = false;
         SDL_DestroyWindow(window);
