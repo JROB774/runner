@@ -36,8 +36,7 @@ void GameOver::initialise (J_Font* a_font, const int a_score)
     score = 0, finalScore = a_score;
     grade = MEDAL_EMPTY;
 
-    if (Highscore::save(finalScore) == 1) { newBest = true; }
-    else { newBest = false; }
+    newBest = Highscore::addScore(finalScore);
 
     startCounter = 60;
     medalCounter = 60;

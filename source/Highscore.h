@@ -7,9 +7,15 @@ class Highscore
 {
     public:
 
-        static int save(const int);
-        static std::string load();
+        static void setScores(const int*);
+        static int* getScores();
+
+        static bool addScore(const int);
         static void reset();
+
+    private:
+
+        static int highscores[HIGHSCORE_TOTAL];
 };
 
 #endif // INCLUDE_HIGHSCORE

@@ -31,7 +31,7 @@ void Save::step ()
     std::string currSeason = Game::getSeason();
     int currCharacter = Player::getCharacter();
     int currKeys[Player::KEY_TOTAL] = {};
-    int currHighscores[HIGHSCORE_TOTAL] = {}; // @ICNOMPLETE!
+    const int* currHighscores = Highscore::getScores();
 
     currKeys[0] = Player::getKey(0);
     currKeys[1] = Player::getKey(1);
@@ -134,7 +134,7 @@ void Save::load ()
     Player::setKey(0, keys[0]);
     Player::setKey(1, keys[1]);
     Player::setKey(2, keys[2]);
-    // @INCOMPLETE: Highscores...
+    Highscore::setScores(highscores);
 
     FILESYS_SYNC();
 }

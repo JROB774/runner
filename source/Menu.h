@@ -162,7 +162,6 @@ class Stat
 
         static J_Quad background;
         static J_Font* font;
-        static std::string highscores[10];
         static J_Sound resetNoise;
         static ButtonList buttonMain, buttonReset;
         static J_Sound tick;

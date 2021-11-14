@@ -30,7 +30,7 @@ void Game::initialise (J_Font* a_font)
     bar.colour = { 83, 83, 83, 255, SDL_BLENDMODE_BLEND };
 
     score = 0;
-    bestScore = Highscore::save(-1);
+    bestScore = Highscore::getScores()[0];
 
     Player::initialise();
     EntityHandler::initialise();

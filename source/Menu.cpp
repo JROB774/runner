@@ -586,7 +586,6 @@ void Config::terminate ()
 
 J_Quad Stat::background;
 J_Font* Stat::font = nullptr;
-std::string Stat::highscores[10];
 J_Sound Stat::resetNoise;
 ButtonList Stat::buttonMain, Stat::buttonReset;
 J_Sound Stat::tick;
@@ -660,13 +659,12 @@ void Stat::render ()
 
         J_Colour grey = { 83, 83, 83, 255, SDL_BLENDMODE_BLEND };
 
-        font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 10) / 2), 0,
-                     "Highscores", grey);
+        font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 10) / 2), 0, "Highscores", grey);
 
         for (int i = 0, iy = 32; i < 10; ++i, iy += font->getCharHeight())
         {
-            font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)highscores[i].length()) / 2),
-                         iy, highscores[i], grey);
+            std::string score = std::to_string(Highscore::getScores()[i]);
+            font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)score.length()) / 2), iy, score, grey);
         }
 
         buttonMain.render();
@@ -677,12 +675,12 @@ void Stat::render ()
 
         J_Colour grey = { 83, 83, 83, 255, SDL_BLENDMODE_BLEND };
 
-        font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 10) / 2), 0,
-                     "Highscores", grey);
+        font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 10) / 2), 0, "Highscores", grey);
 
-        font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 32) / 2),
-                     (J_Window::getScreenHeight() / 2) - (font->getCharHeight() / 2),
-                     "Are you sure you want to reset?", grey);
+        int textX = (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 32) / 2);
+        int textY = (J_Window::getScreenHeight() / 2) - (font->getCharHeight() / 2);
+
+        font->render(textX, textY, "Are you sure you want to reset?", grey);
 
         buttonReset.render();
     }
@@ -710,7 +708,6 @@ void Stat::yes (Button* a_button, const int a_interaction)
     Highscore::reset();
     update();
     resetNoise.play(0);
-
     state = STATE_ACTIVE;
 }
 
@@ -727,8 +724,6 @@ void Stat::terminate ()
 {
     font = nullptr;
 
-    for (int i = 0; i < 10; ++i) { highscores[i] = "\0"; }
-
     resetNoise.destroy();
 
     buttonMain.destroy();
@@ -743,14 +738,7 @@ void Stat::terminate ()
 
 void Stat::update ()
 {
-    std::string rawData = Highscore::load();
-    char* data = &rawData[0];
-
-    for (unsigned int i = 0; i < rawData.length(); ++i) { if (rawData[i] == ' ') { rawData[i] = '\n'; } }
-    highscores[0] = strtok(data, "\n");
-    for (int i = 1; i < 10; ++i) { highscores[i] = strtok(nullptr, "\n"); }
-
-    data = nullptr;
+    // Nothing needed...
 }
 
 /// STAT //////////////////////////////////////////////////////////////////////
