@@ -33,8 +33,6 @@ class J_System
         static void stop();
 
         static SDL_Event getEvent();
-        static J_Timer* getFpsTimer();
-        static J_Timer* getCapTimer();
         static int getFps();
         static bool isDebug();
         static int getState();
@@ -45,7 +43,6 @@ class J_System
 
         static const std::string SYSTEM_FILE;
         static SDL_Event event;
-        static J_Timer fpsTimer, capTimer;
         static int fps, tpf;
         static int frameCount;
         static double averageFps;

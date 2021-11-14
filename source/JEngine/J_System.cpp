@@ -2,7 +2,6 @@
 
 const std::string J_System::SYSTEM_FILE = RES_DIR_DATA "System.dat";
 SDL_Event J_System::event;
-J_Timer J_System::fpsTimer, J_System::capTimer;
 int J_System::fps = 0, J_System::tpf = 0;
 int J_System::frameCount = 0;
 double J_System::averageFps = 0.0;
@@ -105,12 +104,6 @@ void J_System::handle ()
 
 void J_System::stepBegin ()
 {
-    // Calculate the average FPS.
-    #ifndef PLATFORM_WEB
-    averageFps = frameCount / (fpsTimer.getTicks() / 1000.0);
-    if (averageFps > 2000000.0) { averageFps = 0.0; }
-    #endif
-
     // Set the renderer colour to default and clear the screen.
     J_Renderer::setColour(J_Renderer::DEFAULT_COLOUR);
     J_Renderer::clear();
@@ -120,12 +113,6 @@ void J_System::stepEnd ()
 {
     // Update the screen with everyting that needs to be rendered.
     J_Renderer::update();
-
-    // Increment the frame count.
-    #ifndef PLATFORM_WEB
-    int frameTicks = capTimer.getTicks();
-    if (frameTicks < tpf) { SDL_Delay(tpf - frameTicks); }
-    #endif
 
     ++frameCount;
 }
@@ -154,16 +141,6 @@ SDL_Event J_System::getEvent ()
     return event;
 }
 
-J_Timer* J_System::getFpsTimer ()
-{
-    return &fpsTimer;
-}
-
-J_Timer* J_System::getCapTimer ()
-{
-    return &capTimer;
-}
-
 int J_System::getFps ()
 {
     return fps;
@@ -184,7 +161,6 @@ int J_System::getState ()
 void J_System::terminate ()
 {
     // Reset everything.
-    fpsTimer.stop(), capTimer.stop();
     frameCount = 0;
     averageFps = 0.0;
 
@@ -194,7 +170,6 @@ void J_System::terminate ()
     J_Renderer::terminate();
     J_Window::terminate();
     J_Error::terminate();
-
 
     // If the system is not resetting then terminate all the SDL sub-systems.
     if (state != STATE_RESETTING)

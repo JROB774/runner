@@ -4,16 +4,41 @@
 
 void main_loop ()
 {
+    static Uint64 performanceFrequency = SDL_GetPerformanceFrequency();
+    static Uint64 lastCounter = SDL_GetPerformanceCounter();
+    static Uint64 endCounter = 0;
+    static Uint64 elapsedCounter = 0;
+
+    static float updateTimer = 0.0f;
+
+    float updateRate = 1.0f / (float)J_System::getFps();
+
     while (J_System::pollEvent() != 0)
     {
         J_System::handle();
         Container::handle();
     }
 
-    J_System::stepBegin();
-    Container::step();
-    Container::render();
-    J_System::stepEnd();
+    bool updated = false;
+    while(updateTimer >= updateRate)
+    {
+        J_System::stepBegin();
+        Container::step();
+        Container::render();
+        updateTimer -= updateRate;
+        updated = true;
+    }
+
+    endCounter = SDL_GetPerformanceCounter();
+    elapsedCounter = endCounter - lastCounter;
+    lastCounter = SDL_GetPerformanceCounter();
+
+    updateTimer += (float)elapsedCounter / (float)performanceFrequency;
+
+    if(updated)
+    {
+        J_System::stepEnd();
+    }
 }
 
 int main (int argc, char* argv[])
