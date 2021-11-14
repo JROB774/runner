@@ -119,6 +119,11 @@ void Save::load ()
         file.close();
     }
 
+    // We never start in fullscreen on web as it causes some problems!
+    #ifdef PLATFORM_WEB
+    fullscreen = false;
+    #endif
+
     J_Window::setWidth(windowWidth); // Needs to be before fullscreen to set correctly!
     J_Window::setHeight(windowHeight); // Needs to be before fullscreen to set correctly!
     J_Window::setFullscreen(fullscreen);
