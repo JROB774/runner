@@ -4,6 +4,8 @@ Release v1.3.0 on ???, 2021
 - A new character, the @INCOMPLETE@, has been added!
 - Screen content now automatically resizes based on window size.
 - Improved handling of saving and loading.
+- Now saving window dimensions between play sessions.
+- Mouse cursor is now only hidden in fullscreen mode.
 - Fixed issues with window resizing in a strange way.
 - Fixed a crash with a certain character when in Halloween mode.
 - Fixed menu buttons being slightly off-center.
