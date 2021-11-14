@@ -418,15 +418,14 @@ void Config::handle ()
 
 void Config::render ()
 {
-    #ifdef PLATFORM_WEB
-    std::string windowText = J_Window::getFullscreen() ? "Go Windowed" : "Go Fullscreen";
-    button.getButton(2)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)windowText.length()) / 2) - 3, 60);
-    button.getButton(2)->updateText(windowText);
-    #endif
-
     if (state == STATE_ACTIVE)
     {
-         J_Renderer::drawQuadFilled(background);
+        // This can update from external places so we need to update it regularly to stop it from falling out of date.
+        std::string windowText = J_Window::getFullscreen() ? "Go Windowed" : "Go Fullscreen";
+        button.getButton(2)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)windowText.length()) / 2) - 3, 60);
+        button.getButton(2)->updateText(windowText);
+
+        J_Renderer::drawQuadFilled(background);
 
         J_Colour grey = { 83, 83, 83, 255, SDL_BLENDMODE_BLEND };
         font->render((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * 6) / 2), 0,
