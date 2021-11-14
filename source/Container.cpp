@@ -6,14 +6,14 @@ J_Font Container::font;
 
 void Container::initialise ()
 {
+    Save::load();
+
     font.create("Font");
 
     Menu::initialise(&font);
     ButtonList::initialise();
 
     srand(static_cast <unsigned int> (time(nullptr)));
-
-    Save::load();
 }
 
 
