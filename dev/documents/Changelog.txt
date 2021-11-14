@@ -1,7 +1,5 @@
 Release v1.3.0 on ???, 2021
 ---------------------------------------------------------
-- A whole new set of festive graphics have been added!
-- A new character, the Snowman, has been added!
 - Screen content now automatically resizes based on window size.
 - Improved handling of saving and loading.
 - Now saving window dimensions between play sessions.

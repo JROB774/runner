@@ -489,10 +489,10 @@ void Config::toggleFullscreen (Button* a_button, const int a_interaction)
 
 void Config::setSeason (Button* a_button, const int a_interaction)
 {
-    static const std::string seasons[] = { "None", "Halloween", "Christmas" };
+    static const std::string seasons[] = { "None", "Halloween" };
 
     int current = 0;
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 2; ++i)
     {
         if (Game::getSeason() == seasons[i])
         {
@@ -503,8 +503,8 @@ void Config::setSeason (Button* a_button, const int a_interaction)
 
     current += a_interaction;
 
-    if (current < 0) { current = 2; }
-    if (current > 2) { current = 0; }
+    if (current < 0) { current = 1; }
+    if (current > 1) { current = 0; }
 
     Game::setSeason(seasons[current]);
 
