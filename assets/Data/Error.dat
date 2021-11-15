@@ -42,7 +42,6 @@ GAME_ERROR_ROOM_SPAWN=Could not spawn a room due ot insufficient memory!:0
 GAME_ERROR_ENTITY_SPAWN=Could not spawn an entity due to insufficient memory!:0
 GAME_ERROR_LOAD_DIFFICULTY=Could not open the difficulty file for loading!:0
 GAME_ERROR_LOAD_ROOM=Could not open the room file for loading!:0
-GAME_ERROR_WINDOW_SET_ICON=Could not set the window's SDL icon!:1
 GAME_ERROR_BUTTONLIST_ADD=Could not add a new button to a button list!:0
 GAME_ERROR_LOAD=Could not open the save file for loading!:0
 GAME_ERROR_SAVE=Could not open the save file for saving!:0
