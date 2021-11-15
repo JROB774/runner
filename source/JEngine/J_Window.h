@@ -40,7 +40,7 @@ class J_Window
         static std::string title;
         static int startWidth, startHeight;
         static int cachedWidth, cachedHeight;
-        static int screenWidthScaled, screenHeightScaled;;
+        static int screenWidthScaled, screenHeightScaled;
         static int screenWidth, screenHeight;
         static bool fullscreen;
         static SDL_Window* window;

@@ -37,49 +37,49 @@ void Save::step ()
     currKeys[1] = Player::getKey(1);
     currKeys[2] = Player::getKey(2);
 
-    if(fullscreen != currFullscreen)
+    if (fullscreen != currFullscreen)
     {
         fullscreen = currFullscreen;
         changed = true;
     }
-    if(volume != currSoundVolume)
+    if (volume != currSoundVolume)
     {
         volume = currSoundVolume;
         changed = true;
     }
-    if(mute != currMute)
+    if (mute != currMute)
     {
         mute = currMute;
         changed = true;
     }
-    if(season != currSeason)
+    if (season != currSeason)
     {
         season = currSeason;
         changed = true;
     }
-    if(character != currCharacter)
+    if (character != currCharacter)
     {
         character = currCharacter;
         changed = true;
     }
-    for(int i=0; i<Player::KEY_TOTAL; ++i)
+    for (int i=0; i<Player::KEY_TOTAL; ++i)
     {
-        if(keys[i] != currKeys[i])
+        if (keys[i] != currKeys[i])
         {
             keys[i] = currKeys[i];
             changed = true;
         }
     }
-    for(int i=0; i<HIGHSCORE_TOTAL; ++i)
+    for (int i=0; i<HIGHSCORE_TOTAL; ++i)
     {
-        if(highscores[i] != currHighscores[i])
+        if (highscores[i] != currHighscores[i])
         {
             highscores[i] = currHighscores[i];
             changed = true;
         }
     }
 
-    if(changed)
+    if (changed)
     {
         DEBUG_LOG("Changed!\n");
         save();

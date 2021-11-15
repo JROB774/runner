@@ -81,7 +81,7 @@ void J_Window::step ()
     // This is needed on the web where forces external to the game can change the
     // fullscreen state. If we don't update this then the flag will be out of sync.
     bool isFullscreen = SDL_GetWindowFlags(window) & (SDL_WINDOW_FULLSCREEN|SDL_WINDOW_FULLSCREEN_DESKTOP);
-    if(isFullscreen != fullscreen) { fullscreen = isFullscreen;  }
+    if (isFullscreen != fullscreen) { fullscreen = isFullscreen;  }
 }
 
 
