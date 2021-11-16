@@ -29,6 +29,8 @@ goto build
 :icon
 rc -nologo -i %ResourcePath% %ResourceFile%
 
+goto build
+
 :build
 
 call timer.bat "cl %IncludeDirs% %Defines% %CompilerFlags% %CompilerWarnings% -Fe%OutputExecutable% %InputSource% -link %LinkerFlags% %LinkerWarnings% %LibraryDirs% %Libraries% %InputResource%"
@@ -45,6 +47,10 @@ if exist %OutputPath%\Resources\ (
     rmdir /s /q %OutputPath%\Resources\
 )
 xcopy assets %OutputPath%\Resources\ /E
+
+:documents
+copy dev\documents\Changes.txt %OutputPath%
+copy dev\documents\ReadMe.txt %OutputPath%
 
 if %BuildMode%==final goto package
 
