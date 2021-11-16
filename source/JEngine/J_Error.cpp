@@ -9,6 +9,8 @@ std::unordered_map <std::string, std::string> J_Error::error;
 
 void J_Error::initialise ()
 {
+    #ifndef PLATFORM_WEB
+
     if (!error.empty()) { return; }
 
     std::ifstream errorFile(ERROR_FILE);
@@ -59,12 +61,16 @@ void J_Error::initialise ()
     key = nullptr;
     delete[] content;
     content = nullptr;
+
+    #endif
 }
 
 
 
 void J_Error::log (const std::string a_key)
 {
+    #ifndef PLATFORM_WEB
+
     if (error.empty()) { messageBox("FATAL ERROR\nCould not write an error to the log!"); }
 
     std::string key = a_key;
@@ -100,25 +106,35 @@ void J_Error::log (const std::string a_key)
     else { messageBox("FATAL ERROR\nCould not write an error to the log!"); }
 
     messageBox("An error has occured!\nCheck the 'Error.log' for more details.");
+
+    #endif
 }
 
 
 
 void J_Error::terminate ()
 {
+    #ifndef PLATFORM_WEB
+
     if (!error.empty())
     {
         total = 0;
         error.clear();
     }
+
+    #endif
 }
 
 
 
 void J_Error::messageBox (const std::string a_message)
 {
+    #ifndef PLATFORM_WEB
+
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "J-Engine Error", a_message.c_str(), J_Window::getWindow());
     exit(EXIT_FAILURE);
+
+    #endif
 }
 
 /// J_ERROR ///////////////////////////////////////////////////////////////////
