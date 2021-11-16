@@ -58,7 +58,7 @@ copy dev\documents\ReadMe.txt %OutputPath%
 
 :package
 pushd %OutputPath%
-set ZipName=%OutputName%.zip
+set ZipName=%OutputName%-v%Version%-Windows.zip
 if exist %ZipName% rm %ZipName%
 tar -a -c --exclude=save.dat --exclude=*.log --exclude=*.pdb --transform 's,^,%OutputName%/,' -f %ZipName% *
 popd
