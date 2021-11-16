@@ -5,7 +5,7 @@
          | |__) |   _ _ __  _ __   ___ _ __
          |  _  / | | | '_ \| '_ \ / _ \ '__|
          | | \ \ |_| | | | | | | |  __/ |
-         |_|  \_\__,_|_| |_|_| |_|\___|_| v1.2.0
+         |_|  \_\__,_|_| |_|_| |_|\___|_| v1.3.0
             A Game by Joshua Robertson
 
 ---------------------------------------------------------
@@ -22,7 +22,7 @@ world with no end in sight... how long will you last?
 CONTROLS
 
 ARROWS      :: Menu Navigation
-ENTER/SPACE :: Menu Select
+SPACE       :: Menu Select
 SPACE       :: Pause
 UP ARROW    :: Jump
 DOWN ARROW  :: Slide
