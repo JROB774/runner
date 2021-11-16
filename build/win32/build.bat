@@ -48,19 +48,19 @@ if exist %OutputPath%\Resources\ (
 )
 xcopy assets %OutputPath%\Resources\ /E
 
+if %BuildMode%==final goto documents
+
+goto end
+
 :documents
 copy dev\documents\Changes.txt %OutputPath%
 copy dev\documents\ReadMe.txt %OutputPath%
-
-if %BuildMode%==final goto package
-
-goto end
 
 :package
 pushd %OutputPath%
 set ZipName=%OutputName%.zip
 if exist %ZipName% rm %ZipName%
-tar -a -c --exclude=save.dat --exclude=*.log --exclude=*.pdb --transform 's,^,RUNNER/,' -f %ZipName% *
+tar -a -c --exclude=save.dat --exclude=*.log --exclude=*.pdb --transform 's,^,%OutputName%/,' -f %ZipName% *
 popd
 
 goto end

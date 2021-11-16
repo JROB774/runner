@@ -14,7 +14,7 @@ set AssetPath=assets
 set InputSource=source\Main.cpp
 
 set OutputPath=binary\web\
-set OutputName=RUNNER
+set OutputName=Runner
 
 set OutputExecutable=%OutputPath%%OutputName%
 
