@@ -34,7 +34,7 @@ set OutputName=Runner
 
 set OutputExecutable=%OutputPath%%OutputName%
 
-set Version=1.3.0
+set Version=1.4.0
 
 if "%BuildMode%"=="" goto end
 
