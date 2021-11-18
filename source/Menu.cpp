@@ -362,7 +362,6 @@ void Config::initialise (J_Font* a_font)
     #ifdef PLATFORM_WEB
     button.create(Button::TYPE_SLIDER, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)volumeText.length()) / 2) - 3, 44, volumeText, font, &setVolume);
     button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)muteText.length())   / 2) - 3, 52, muteText,   font, &toggleMute);
-    button.create(Button::TYPE_PRESS,  9999,                                                                                           60, windowText, font, &toggleFullscreen);
     button.create(Button::TYPE_SLIDER, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)seasonText.length()) / 2) - 3, 60, seasonText, font, &setSeason);
     button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)rebindText.length()) / 2) - 3, 68, rebindText, font, &rebind);
     button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)resetText.length())  / 2) - 3, 76, resetText,  font, &reset);
@@ -431,9 +430,11 @@ void Config::render ()
     if (state == STATE_ACTIVE)
     {
         // This can update from external places so we need to update it regularly to stop it from falling out of date.
+        #ifndef PLATFORM_WEB
         std::string windowText = J_Window::getFullscreen() ? "Go Windowed" : "Go Fullscreen";
         button.getButton(2)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)windowText.length()) / 2) - 3, 60);
         button.getButton(2)->updateText(windowText);
+        #endif
 
         J_Renderer::drawQuadFilled(background);
 
@@ -546,15 +547,23 @@ void Config::reset (Button* a_button, const int a_interaction)
     std::string windowText = J_Window::getFullscreen() ? "Go Windowed" : "Go Fullscreen";
     std::string seasonText = "Season: " + Game::getSeason();
 
+    #ifdef PLATFORM_WEB
+    button.getButton(0)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)volumeText.length()) / 2) - 3, 44);
+    button.getButton(1)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)muteText.length())   / 2) - 3, 52);
+    button.getButton(2)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)seasonText.length()) / 2) - 3, 60);
+    button.getButton(0)->updateText(volumeText);
+    button.getButton(1)->updateText(muteText);
+    button.getButton(2)->updateText(seasonText);
+    #else
     button.getButton(0)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)volumeText.length()) / 2) - 3, 44);
     button.getButton(1)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)muteText.length())   / 2) - 3, 52);
     button.getButton(2)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)windowText.length()) / 2) - 3, 60);
     button.getButton(3)->updatePosition((J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)seasonText.length()) / 2) - 3, 68);
-
     button.getButton(0)->updateText(volumeText);
     button.getButton(1)->updateText(muteText);
     button.getButton(2)->updateText(windowText);
     button.getButton(3)->updateText(seasonText);
+    #endif
 }
 
 void Config::menu (Button* a_button, const int a_interaction)
