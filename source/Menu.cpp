@@ -359,6 +359,15 @@ void Config::initialise (J_Font* a_font)
     std::string resetText  = "Reset Config";
     std::string backText   = "Back";
 
+    #ifdef PLATFORM_WEB
+    button.create(Button::TYPE_SLIDER, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)volumeText.length()) / 2) - 3, 44, volumeText, font, &setVolume);
+    button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)muteText.length())   / 2) - 3, 52, muteText,   font, &toggleMute);
+    button.create(Button::TYPE_PRESS,  9999,                                                                                           60, windowText, font, &toggleFullscreen);
+    button.create(Button::TYPE_SLIDER, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)seasonText.length()) / 2) - 3, 60, seasonText, font, &setSeason);
+    button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)rebindText.length()) / 2) - 3, 68, rebindText, font, &rebind);
+    button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)resetText.length())  / 2) - 3, 76, resetText,  font, &reset);
+    button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)backText.length())   / 2) - 3, 84, backText,   font, &menu);
+    #else
     button.create(Button::TYPE_SLIDER, (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)volumeText.length()) / 2) - 3, 44, volumeText, font, &setVolume);
     button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)muteText.length())   / 2) - 3, 52, muteText,   font, &toggleMute);
     button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)windowText.length()) / 2) - 3, 60, windowText, font, &toggleFullscreen);
@@ -366,6 +375,7 @@ void Config::initialise (J_Font* a_font)
     button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)rebindText.length()) / 2) - 3, 76, rebindText, font, &rebind);
     button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)resetText.length())  / 2) - 3, 84, resetText,  font, &reset);
     button.create(Button::TYPE_PRESS,  (J_Window::getScreenWidth() / 2) - ((font->getCharWidth() * (int)backText.length())   / 2) - 3, 92, backText,   font, &menu);
+    #endif
 
     tick.create("Tick", 0);
 

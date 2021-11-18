@@ -1,3 +1,8 @@
+Release v1.4.0 on Novekber 19th, 2021
+---------------------------------------------------------
+- Removed broken fullscreen from the web build of the game.
+
+
 Release v1.3.0 on November 18th, 2021
 ---------------------------------------------------------
 - Screen content now automatically resizes based on window size.

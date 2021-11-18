@@ -57,6 +57,7 @@ void J_Window::handle (const SDL_Event& a_event, const bool a_debug)
     }
 
     // Handle all window debug events.
+    #ifndef PLATFORM_WEB
     if (a_debug)
     {
         if (a_event.type == SDL_KEYDOWN)
@@ -71,6 +72,7 @@ void J_Window::handle (const SDL_Event& a_event, const bool a_debug)
             }
         }
     }
+    #endif
 }
 
 
